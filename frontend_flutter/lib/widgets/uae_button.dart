@@ -36,7 +36,7 @@ class UAEButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: enabled ? onPressed : null,
       style: ElevatedButton.styleFrom(
-        backgroundColor: enabled ? effectiveColor : effectiveColor.withOpacity(0.6),
+        backgroundColor: enabled ? effectiveColor : effectiveColor.withAlpha((0.6 * 255).toInt()),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
