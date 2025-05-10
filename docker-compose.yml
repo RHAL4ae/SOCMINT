@@ -1,0 +1,175 @@
+
+version: "3.9"
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: elasticsearch
+    environment:
+      - node.name=es01
+      - cluster.name=socmint-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      socmint_network:
+        aliases:
+          - elasticsearch
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      socmint_network:
+        aliases:
+          - postgres
+    restart: unless-stopped
+
+  neo4j:
+    image: neo4j:5.15.0
+    container_name: neo4j
+    environment:
+      - NEO4J_AUTH=${NEO4J_AUTH}
+    volumes:
+      - neo4jdata:/data
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    networks:
+      socmint_network:
+        aliases:
+          - neo4j
+    restart: unless-stopped
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.2
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      socmint_network:
+        aliases:
+          - zookeeper
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.2
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      socmint_network:
+        aliases:
+          - kafka
+    restart: unless-stopped
+
+  spark-master:
+    image: bitnami/spark:3.5.0
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - "8080:8080"
+    networks:
+      socmint_network:
+        aliases:
+          - spark-master
+    restart: unless-stopped
+
+  spark-worker:
+    image: bitnami/spark:3.5.0
+    container_name: spark-worker
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    depends_on:
+      - spark-master
+    networks:
+      socmint_network:
+        aliases:
+          - spark-worker
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    environment:
+      - ENV_FILE=.env
+    ports:
+      - "8000:8000"
+    networks:
+      socmint_network:
+        aliases:
+          - backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - elasticsearch
+      - kafka
+      - neo4j
+      - spark-master
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    networks:
+      socmint_network:
+        aliases:
+          - frontend
+    restart: unless-stopped
+
+  tor:
+    build:
+      context: ./tor
+      dockerfile: Dockerfile
+    container_name: tor
+    ports:
+      - "9050:9050"
+    networks:
+      socmint_network:
+        aliases:
+          - tor
+    restart: unless-stopped
+
+volumes:
+  esdata:
+  pgdata:
+  neo4jdata:
+
+networks:
+  socmint_network:
+    driver: bridge

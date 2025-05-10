@@ -1,0 +1,15 @@
+{
+  "appTitle": "داشبورد سوسمینت",
+  "login": "ورود",
+  "logout": "خروج",
+  "username": "نام کاربری",
+  "password": "رمز عبور",
+  "dashboardAdmin": "داشبورد مدیر",
+  "dashboardAnalyst": "داشبورد تحلیلگر",
+  "dashboardViewer": "داشبورد مشاهده‌گر",
+  "dataSourceManager": "مدیریت منابع داده",
+  "uaePass": "ورود با UAE PASS",
+  "language": "زبان",
+  "darkMode": "حالت تاریک",
+  "lightMode": "حالت روشن"
+}

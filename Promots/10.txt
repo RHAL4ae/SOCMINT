@@ -1,0 +1,82 @@
+## Prompt 10: UAE PASS Integration for SOCMINT Authentication
+
+Integrate UAE PASS as the primary identity provider (IdP) into the SOCMINT SaaS platform for secure authentication and digital identity validation.
+
+### Objective
+
+Allow SOCMINT users to authenticate via UAE PASS using OpenID Connect (OIDC), ensuring national identity-level assurance and regulatory compliance.
+
+---
+
+### Backend Configuration (FastAPI)
+
+1. **Service Name:** `auth_uaepass`
+2. **Authentication Flow:**
+   - OAuth2 Authorization Code with PKCE
+   - UAE PASS Sandbox endpoints:
+     - `https://stg-id.uaepass.ae/idshub/authorize`
+     - `https://stg-id.uaepass.ae/idshub/token`
+     - `https://stg-id.uaepass.ae/idshub/userinfo`
+
+3. **Functionality:**
+   - Redirect user to UAE PASS login
+   - Handle authorization code callback
+   - Exchange token
+   - Retrieve user info and extract:
+     - Emirates ID
+     - Full name
+     - Mobile number
+     - Email
+   - Map UAE PASS user to internal `tenant_id`, `user_id`, and `role`
+   - Issue SOCMINT JWT token
+
+4. **Endpoints:**
+   - `GET /auth/uaepass/login`
+   - `GET /auth/uaepass/callback`
+   - `GET /auth/profile`
+   - `POST /auth/logout`
+
+---
+
+### .env Variables
+
+```env
+UAE_PASS_CLIENT_ID=...
+UAE_PASS_CLIENT_SECRET=...
+UAE_PASS_AUTH_URL=https://stg-id.uaepass.ae/idshub/authorize
+UAE_PASS_TOKEN_URL=https://stg-id.uaepass.ae/idshub/token
+UAE_PASS_USERINFO_URL=https://stg-id.uaepass.ae/idshub/userinfo
+REDIRECT_URI=https://socmint.ae/auth/uaepass/callback
+Frontend Integration (Flutter)
+Add login option "تسجيل الدخول عبر الهوية الرقمية"
+
+On click:
+
+Redirect to /auth/uaepass/login
+
+On success:
+
+Receive JWT and store securely
+
+Route to user dashboard based on role
+
+Display name/national ID in profile
+
+Security Considerations
+All tokens via HTTPS
+
+Validate JWTs with UAE PASS public keys
+
+Verify nonce, audience, and expiration
+
+Log all login attempts and token transactions
+
+Output
+End-to-end authentication flow via UAE PASS
+
+JWT mapped to SOCMINT roles and tenants
+
+Secure and verifiable login
+
+Fully integrated backend + Flutter support
+"""

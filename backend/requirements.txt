@@ -1,0 +1,29 @@
+# SOCMINT Backend - Consolidated Requirements
+# Aggregated from all backend submodules
+fastapi
+uvicorn
+kafka-python
+transformers
+scikit-learn
+pydantic
+elasticsearch
+elasticsearch>=8.0.0
+neo4j
+neo4j-driver
+psycopg2-binary
+python-dotenv
+requests
+scrapy
+selenium
+torpy
+web3
+cryptography
+pandas
+# ai_analytics_service dependencies
+# (add other dependencies from ai_analytics_service/requirements.txt here)
+# cyber_forensics_service dependencies
+# (add other dependencies from cyber_forensics_service/requirements.txt here)
+# data_collector dependencies
+# (add other dependencies from data_collector/requirements.txt here)
+# financial_crime_service dependencies
+# (add other dependencies from financial_crime_service/requirements.txt here)

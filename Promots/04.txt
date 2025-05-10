@@ -1,0 +1,93 @@
+## Prompt 4: Financial Crime Detection Microservice
+
+Create a FastAPI microservice named `financial_crime_service` to identify financial crimes such as money laundering or fraud using machine learning.
+
+### Objective
+
+Analyze structured and unstructured financial behavior using clustering and anomaly detection algorithms. Visualize and store findings in PostgreSQL and Neo4j.
+
+### Microservice Structure
+
+backend/
+
+└── financial_crime_service/
+
+├── Dockerfile
+
+├── requirements.txt
+
+├── main.py
+
+├── analytics/
+
+│   ├── anomaly_detection.py
+
+│   ├── clustering.py
+
+│   └── graph_risk_analysis.py
+
+└── utils/
+
+├── elasticsearch_connector.py
+
+├── postgres_connector.py
+
+└── neo4j_connector.py
+
+### Functional Requirements
+
+1. **Anomaly Detection**
+
+- Use Isolation Forest to detect unusual patterns
+
+- Flag risky entities or transactions
+
+2. **Clustering**
+
+- Apply KMeans to group entities by behavior
+
+- Identify fraud rings or money routes
+
+3. **Graph Analysis**
+
+- Push relationships to Neo4j
+
+- Use PageRank or Betweenness Centrality
+
+4. **API Endpoints**
+
+- `POST /run-analysis` — Full detection flow
+
+- `GET /alerts` — Recent risk flags
+
+- `GET /clusters` — Groupings of risky entities
+
+5. **PostgreSQL Schema**
+
+- `financial_alerts(id, tenant_id, entity, score, reason, timestamp)`
+
+- `clusters(cluster_id, member_id, risk_level)`
+
+6. **Neo4j Graph Schema**
+
+- Nodes: Person, Company, Account, Transaction
+
+- Relationships: `OWNS`, `TRANSFERRED_TO`, `SUSPICIOUS_LINKED`
+
+### Dockerfile & Env
+
+- Python 3.10+, pandas, scikit-learn, elasticsearch, psycopg2-binary, neo4j-driver
+
+- `.env` includes DB creds, ES/Neo4j endpoints
+
+### Output
+
+- Anomaly flags into PostgreSQL
+
+- Graph structure in Neo4j
+
+- Clear REST API to view alerts and clusters
+
+- Docker-ready service
+
+"""

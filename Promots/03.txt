@@ -1,0 +1,95 @@
+## Prompt 3: AI Analytics Microservice (NLP + Classification)
+
+Develop a FastAPI microservice named `ai_analytics_service` that analyzes textual data using NLP and AI models to generate actionable insights.
+
+### Objective
+
+Consume raw social and scraped data from Kafka, process it using machine learning models (sentiment, NER, topic classification), and output results to Elasticsearch and Neo4j.
+
+### Microservice Structure
+
+backend/
+
+└── ai_analytics_service/
+
+├── Dockerfile
+
+├── requirements.txt
+
+├── main.py
+
+├── models/
+
+│   ├── sentiment_analysis.py
+
+│   ├── ner.py
+
+│   └── topic_classification.py
+
+└── utils/
+
+├── kafka_consumer.py
+
+├── elasticsearch_client.py
+
+└── neo4j_client.py
+
+### Functional Requirements
+
+1. **Kafka Integration**
+
+- Consume messages from:
+
+- `raw_social_data`
+
+- `raw_scraped_data`
+
+- Batch or streaming mode
+
+2. **Text Processing**
+
+- Sentiment Analysis using AraBERT/mBERT
+
+- Named Entity Recognition (NER): extract Person, Location, Org
+
+- Topic Classification (e.g. crime, politics, finance)
+
+3. **Data Output**
+
+- Write enriched data to Elasticsearch index `processed_data`
+
+- Create entity graphs and relationships in Neo4j
+
+4. **API Endpoints**
+
+- `GET /health`
+
+- `POST /test` — Accepts text and returns sentiment/NER/topic result
+
+- `GET /models` — Lists available NLP models
+
+### Output Format
+
+```json
+
+{
+
+"source": "twitter",
+
+"text": "...",
+
+"sentiment": { "label": "negative", "confidence": 0.91 },
+
+"entities": [
+
+{"type": "PERSON", "value": "John Doe"},
+
+{"type": "ORG", "value": "Interpol"}
+
+],
+
+"topic": "cybercrime",
+
+"timestamp": "2025-05-07T10:00:00Z"
+
+}

@@ -1,0 +1,101 @@
+
+## Prompt 8: Social Media Manager Microservice (Postiz Integration)
+
+Integrate the open-source Postiz App as a multi-tenant social media management microservice within the SOCMINT platform.
+
+### Objective
+
+Enable each tenant to securely manage their social media accounts (Facebook, Twitter, LinkedIn, etc.) for scheduling, publishing, and analytics — isolated per customer.
+
+---
+
+### Microservice Structure
+
+backend/
+└── social_media_manager/
+    ├── Dockerfile
+    ├── requirements.txt
+    ├── main.py
+    ├── routes/
+    │   ├── auth.py
+    │   ├── posts.py
+    │   ├── scheduler.py
+    │   └── analytics.py
+    ├── models/
+    │   ├── user.py
+    │   ├── tenant.py
+    │   ├── post.py
+    │   └── campaign.py
+    └── utils/
+        ├── token_verification.py
+        └── oauth_handler.py
+
+---
+
+### Functional Requirements
+
+1. **Multi-Tenant Auth Integration**
+   - Validate JWT from SOCMINT’s identity provider
+   - Enforce tenant isolation via `tenant_id`
+
+2. **Social Media API Integration**
+   - OAuth2 integration for Twitter, Facebook, LinkedIn
+   - Store tokens per tenant and refresh periodically
+
+3. **Post Scheduling and Publishing**
+   - Create and schedule posts
+   - Trigger posting jobs with APScheduler or Celery
+   - Monitor status (published, failed, queued)
+
+4. **Analytics Reporting**
+   - Track engagements (likes, comments, reach)
+   - Generate per-campaign reports
+   - Output to PostgreSQL and optionally Elasticsearch
+
+5. **API Endpoints**
+   - `POST /connect/account`
+   - `POST /schedule`
+   - `GET /posts`
+   - `GET /analytics/campaign/{id}`
+
+---
+
+### PostgreSQL Schema
+
+- `social_accounts(id, tenant_id, platform, token, refresh_token)`
+- `posts(id, tenant_id, content, scheduled_time, status)`
+- `campaigns(id, tenant_id, name, metrics_json)`
+
+---
+
+### Flutter Frontend Additions
+
+- Add screen `SocialMediaManagerScreen`
+- Features:
+  - Account linking and status
+  - Post calendar
+  - Campaign insights
+
+---
+
+### Dockerfile
+
+- Python 3.10+, FastAPI, APScheduler, OAuthlib, SQLAlchemy, psycopg2
+
+---
+
+### Security Considerations
+
+- Use HTTPS
+- Isolate all tenant data via `tenant_id`
+- Encrypt API tokens at rest
+
+---
+
+### Output
+
+- Fully working multi-tenant social media manager
+- Postiz-based code adapted for SOCMINT
+- Integrated into backend and visible in frontend
+- Analytics tracked per tenant
+"""

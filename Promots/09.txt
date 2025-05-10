@@ -1,0 +1,71 @@
+## Prompt 9: Visual Identity System for SOCMINT by RHAL
+
+Design a complete visual identity system for the SOCMINT platform under the branding of "RHAL – عجمان للتقنيات المتقدمة".
+
+### Objective
+
+Establish a consistent, professional identity across all user interfaces, dashboards, reports, and communications that reflects the sovereignty, intelligence, and UAE heritage of the product.
+
+---
+
+### Design Components
+
+1. **Color Palette**
+   - Primary: Extracted green tone from logo
+   - Secondary: White, black, soft gray
+   - Accent: Emirati flag red (alerts, errors)
+
+2. **Typography**
+   - Arabic: Dubai Font or Noto Kufi Arabic
+   - English: Montserrat or Source Sans Pro
+   - Consistent font weights for headings and body
+
+3. **UI Elements**
+   - Buttons: Rounded corners, green hover effect
+   - Cards: Minimalist, light shadow, 12px radius
+   - Sidebars: Dark background with active section highlight in green
+
+4. **Logo Usage**
+   - Always preserve the green bar above "رحّال"
+   - Primary version: white on black
+   - Maintain clear space equal to letter height around logo
+   - No distortion, recoloring, or inversion
+
+5. **Dashboard Layout**
+   - Left sidebar for navigation
+   - Top bar with logo and user menu
+   - Main content: Grid for charts, KPIs, alerts
+   - Default dark mode, with light mode toggle
+
+6. **Landing Page Design**
+   - Hero: centered logo + tagline ("منصة الاستخبارات السيادية متعددة القنوات")
+   - Sections: About, Features, Dashboard, Subscribe
+   - Language switch (ar/en) at top right
+
+7. **Document Style Guide**
+   - Logo variants (color, black/white, favicon)
+   - Font hierarchy for titles, subtitles, body
+   - Templates for PDF reports and presentations
+
+8. **Icons and Favicon**
+   - Create square icon version of the logo
+   - Sizes: 512x512, 192x192, 48x48
+   - Export SVG and PNG formats
+
+---
+
+### Implementation Notes
+
+- Export color codes and fonts as Flutter ThemeData & Tailwind CSS variables
+- All components must be RTL-ready and responsive
+- Ensure consistency across Flutter, PDF exports, and external reports
+
+---
+
+### Output
+
+- Design system documentation
+- UI kit (color tokens, font stacks, component examples)
+- Logo guidelines and assets
+- Style guide for documents and landing pages
+"""

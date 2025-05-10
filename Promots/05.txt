@@ -1,0 +1,99 @@
+## Prompt 5: Cyber Forensics & Blockchain Logging Microservice
+
+Develop a FastAPI microservice named `cyber_forensics_service` to reconstruct incidents, correlate digital evidence, and log data integrity on blockchain.
+
+### Objective
+
+Support digital investigations by generating incident timelines, linking OSINT + logs + financial anomalies, and preserving evidence integrity using Ethereum or Hyperledger.
+
+### Microservice Structure
+
+backend/
+
+└── cyber_forensics_service/
+
+├── Dockerfile
+
+├── requirements.txt
+
+├── main.py
+
+├── forensics/
+
+│   ├── timeline_reconstruction.py
+
+│   ├── evidence_correlation.py
+
+│   └── blockchain_logger.py
+
+└── utils/
+
+├── elasticsearch_fetcher.py
+
+├── postgres_writer.py
+
+└── blockchain_client.py
+
+### Functional Requirements
+
+1. **Timeline Reconstruction**
+
+- Extract and sort logs from Elasticsearch index `security_logs`
+
+- Build chronological JSON timeline with actor, event, impact
+
+2. **Evidence Correlation**
+
+- Match OSINT, financial data, and cyber logs into unified case file
+
+- Store full report in PostgreSQL
+
+3. **Blockchain Logging**
+
+- Use Ethereum or Hyperledger to hash + timestamp each forensic report
+
+- Save hash, txID, and timestamp in `evidence_log`
+
+4. **API Endpoints**
+
+- `POST /generate-report`
+
+- `GET /report/{id}`
+
+- `GET /verify/{id}`
+
+- `GET /health`
+
+5. **PostgreSQL Schema**
+
+- `incident_reports(id, tenant_id, title, timeline_json, blockchain_tx, created_at)`
+
+- `evidence_log(id, report_id, sha256_hash, blockchain_reference, timestamp)`
+
+### Blockchain (.env)
+
+- `BLOCKCHAIN_PROVIDER= https://rpc-url `
+
+- `PRIVATE_KEY=...`
+
+- `CHAIN_ID=...`
+
+- Optional smart contract integration
+
+### Dockerfile & Env
+
+- Python 3.10+, elasticsearch, psycopg2, web3.py, cryptography
+
+- Securely mount blockchain keys and credentials
+
+### Output
+
+- Immutable forensic reports per incident
+
+- API access for human and machine
+
+- Blockchain-verified integrity
+
+- Docker-compatible with full traceability
+
+"""

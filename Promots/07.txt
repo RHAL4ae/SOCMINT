@@ -1,0 +1,129 @@
+
+## Prompt 7: Full Deployment, Integration & Testing of SOCMINT Platform
+
+Deploy and validate the entire SOCMINT SaaS infrastructure using Docker Compose on an Ubuntu Server.
+
+### Objective
+
+Ensure all services (backend, frontend, data pipelines, AI models, storage layers, and integrations) function correctly and are production-ready.
+
+---
+
+### Environment Requirements
+
+- Ubuntu Server 20.04+  
+- Docker & Docker Compose installed  
+- 16-core CPU, 32 GB RAM, 512 GB SSD  
+- Internet access for pulling containers and UAE PASS sandbox testing
+
+---
+
+### Phase 1: Infrastructure Validation
+
+1. **Start Services**
+
+```bash
+docker-compose up -d
+Verify Containers
+
+bash
+
+docker-compose ps
+Network Connectivity
+
+Ensure services communicate via socmint_network.
+
+Test Access via Curl or Browser
+
+Service	Port	Test Command
+Frontend	80	curl http://localhost
+Backend (API)	8000	curl http://localhost:8000/health
+Elasticsearch	9200	curl http://localhost:9200/_cat/indices
+PostgreSQL	5432	Connect using psql
+Neo4j	7474	Open browser and login
+
+
+
+Phase 2: Kafka & Database Testing
+Kafka Topic Test
+
+bash
+
+docker exec -it kafka bash
+kafka-topics.sh --list --bootstrap-server localhost:9092
+Test Message Production/Consumption
+
+Send a sample message to raw_social_data and ensure it's consumed by the AI service.
+
+PostgreSQL
+
+Ensure tables are created:
+
+sql
+
+SELECT * FROM financial_alerts;
+SELECT * FROM incident_reports;
+
+Phase 3: Backend API Testing
+Use Postman or curl to test:
+
+/collect/twitter
+
+/scrape/darkweb
+
+/run-analysis
+
+/generate-report
+
+/verify/<report_id>
+
+/auth/uaepass/login
+
+Phase 4: Frontend Testing
+Test Role-Based Views
+
+Login with Admin → verify access to all dashboards
+
+Login with Analyst → verify analytics only
+
+Login with Viewer → read-only view
+
+Test Language Switching
+
+Switch to Arabic, Farsi, Russian and verify layout
+
+Test UAE PASS Integration
+
+Redirect to sandbox login
+
+Verify JWT returned and user profile loaded
+
+Phase 5: TOR Validation
+Scraping through TOR
+
+Test dark web access via:
+
+bash
+
+curl --socks5-hostname localhost:9050 http://check.torproject.org
+Verify scraping via /scrape/darkweb.
+
+
+Phase 6: Final Review
+Logs: docker-compose logs <service>
+
+Resource Usage: docker stats
+
+Backup: Dump PostgreSQL and Elasticsearch data
+
+Security: Ensure HTTPS for public-facing services
+
+Output
+All services functional
+
+End-to-end data flow validated
+
+Frontend + backend + data layers + blockchain tested
+
+Platform ready for production deployment
+"""

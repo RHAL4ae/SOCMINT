@@ -1,0 +1,15 @@
+{
+  "appTitle": "SOCMINT Дашборд",
+  "login": "Войти",
+  "logout": "Выйти",
+  "username": "Имя пользователя",
+  "password": "Пароль",
+  "dashboardAdmin": "Панель администратора",
+  "dashboardAnalyst": "Панель аналитика",
+  "dashboardViewer": "Панель просмотра",
+  "dataSourceManager": "Менеджер источников данных",
+  "uaePass": "Войти через UAE PASS",
+  "language": "Язык",
+  "darkMode": "Темная тема",
+  "lightMode": "Светлая тема"
+}

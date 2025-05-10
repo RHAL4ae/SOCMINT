@@ -1,0 +1,10 @@
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Green Bar -->
+  <rect x="40" y="20" width="120" height="8" fill="#00A651" />
+  
+  <!-- Background -->
+  <rect x="40" y="28" width="120" height="32" fill="#1A1A1A" />
+  
+  <!-- Arabic Text "رحّال" -->
+  <text x="100" y="52" font-family="Dubai, 'Noto Kufi Arabic', sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle" direction="rtl" unicode-bidi="bidi-override">رحّال</text>
+</svg>

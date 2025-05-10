@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pandas
+scikit-learn
+elasticsearch
+psycopg2-binary
+neo4j-driver
+python-dotenv

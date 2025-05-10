@@ -1,0 +1,15 @@
+{
+  "appTitle": "لوحة تحكم سوسمينت",
+  "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
+  "username": "اسم المستخدم",
+  "password": "كلمة المرور",
+  "dashboardAdmin": "لوحة تحكم المدير",
+  "dashboardAnalyst": "لوحة تحكم المحلل",
+  "dashboardViewer": "لوحة تحكم المشاهد",
+  "dataSourceManager": "إدارة مصادر البيانات",
+  "uaePass": "تسجيل الدخول عبر UAE PASS",
+  "language": "اللغة",
+  "darkMode": "الوضع الداكن",
+  "lightMode": "الوضع الفاتح"
+}

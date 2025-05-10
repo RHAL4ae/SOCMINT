@@ -1,0 +1,105 @@
+## Prompt 2: OSINT Data Collector Microservice (Social APIs + Web Scraping + TOR)
+
+Design a FastAPI microservice named `data_collector` to ingest and normalize data from multiple open-source intelligence (OSINT) sources.
+
+### Objective
+
+Collect structured and unstructured data from social media APIs and websites, including content from the dark web using a TOR proxy, and push the results into Kafka for further processing.
+
+### Microservice Structure
+
+backend/
+
+└── data_collector/
+
+├── Dockerfile
+
+├── requirements.txt
+
+├── main.py
+
+├── collectors/
+
+│   ├── facebook_collector.py
+
+│   ├── twitter_collector.py
+
+│   ├── reddit_collector.py
+
+│   ├── instagram_collector.py
+
+│   ├── whatsapp_collector.py
+
+├── scraper/
+
+│   ├── regular_scraper.py
+
+│   └── darkweb_scraper.py
+
+└── utils/
+
+└── helpers.py
+
+### Functional Requirements
+
+1. **API Collectors**
+
+- Use OAuth2 or token auth.
+
+- Fetch latest posts/comments/messages.
+
+- Normalize results (text, author, timestamp, source).
+
+- Push to Kafka topic: `raw_social_data`.
+
+2. **Web Scraping Modules**
+
+- `regular_scraper.py`: For surface web scraping using Scrapy or Selenium.
+
+- `darkweb_scraper.py`: Uses TOR SOCKS5 proxy at `localhost:9050`.
+
+- Output to Kafka topic: `raw_scraped_data`.
+
+3. **FastAPI Endpoints**
+
+- `POST /collect/<platform>` — Triggers API collection (e.g., facebook, twitter).
+
+- `POST /scrape` — Generic web scraping job.
+
+- `POST /scrape/darkweb` — Triggers dark web scraping via TOR.
+
+- `GET /status` — Returns health status of scrapers and API connectivity.
+
+### Dockerfile Requirements
+
+- Python 3.10+
+
+- Packages: fastapi, uvicorn, requests, scrapy, selenium, kafka-python, torpy, python-dotenv
+
+- Include Chrome and ChromeDriver for headless scraping
+
+### .env Configuration
+
+- `KAFKA_BROKER=kafka:9092`
+
+- `TOR_PROXY=socks5h://localhost:9050`
+
+- Social media tokens and API keys
+
+### Kafka Topics
+
+- `raw_social_data`: All social API output
+
+- `raw_scraped_data`: All scraped content (including dark web)
+
+### Output
+
+- Full Dockerized microservice
+
+- Modular collectors and scrapers
+
+- Kafka integration with retry logic
+
+- API with secure environment variables and status health check
+
+"""

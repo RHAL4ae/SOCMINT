@@ -1,0 +1,107 @@
+## Prompt 11: دعم موسّع لمنصات التواصل الاجتماعي في SOCMINT
+
+توسيع وحدة `data_collector` لجمع البيانات من منصات إضافية لم يتم تغطيتها سابقًا، مع التركيز على تكامل آمن، مستقر، وفعال يتماشى مع سياسة SOCMINT السيادية.
+
+---
+
+### Objective
+
+تمكين SOCMINT من رصد وتحليل محتوى منصات ذات طابع جماهيري أو مغلق نسبيًا من خلال APIs رسمية أو scraping مشروع، مع احترام سياسات الاستخدام وخصوصية المستخدم.
+
+---
+
+### المنصات المطلوب دعمها:
+
+1. **Snapchat**
+   - حالة الربط: ❗️ مغلق - يتطلب شراكة مع Snap Inc.
+   - الخيار المقترح: OSINT scraping من محتوى "Snap Map" المفتوح
+   - عبر أدوات مثل: `snapchat-scraper` + Puppeteer + geofeed data
+
+2. **Telegram**
+   - متاح عبر Telegram Bot API
+   - يتطلب:
+     - إنشاء bot
+     - ربطه بالقنوات المستهدفة (بإذن)
+     - سحب الرسائل باستخدام `getUpdates` أو `getChat`
+
+3. **TikTok**
+   - API رسمي محدود
+   - خيار 1: استخدام TikTok Developer API (يتطلب تطبيق مقبول)
+   - خيار 2: Scraping مشروع باستخدام Playwright/Selenium + User-Agent rotation
+   - استخراج: محتوى الفيديوهات، التعليقات، الإعجابات
+
+4. **Google Business Profiles**
+   - API متاح عبر Google My Business API
+   - OAuth2 flow
+   - البيانات المستهدفة:
+     - تعليقات العملاء
+     - تقييمات
+     - منشورات المؤسسات
+
+---
+
+### Recommended Structure (داخل `data_collector/collectors/`)
+
+- `snapchat_collector.py`  
+- `telegram_collector.py`  
+- `tiktok_collector.py`  
+- `google_business_collector.py`
+
+---
+
+### Integration Strategy
+
+- كل وحدة تستخدم auth المناسب (Token / OAuth / Cookie-based scraping)
+- Normalize المخرجات إلى الشكل التالي:
+
+```json
+{
+  "platform": "tiktok",
+  "content": "تعليق المستخدم على فيديو",
+  "author": "@user123",
+  "timestamp": "2025-05-07T08:45:00Z",
+  "media": "video_url_or_thumbnail",
+  "metadata": {
+    "likes": 154,
+    "shares": 20
+  }
+}
+Kafka Topics
+جميع المخرجات تُرسل إلى raw_social_data أو raw_scraped_data
+
+Edge Cases & Notes
+Snapchat: تجنب الحسابات الخاصة، التركيز على المواقع الجغرافية العامة
+
+Telegram: لا يمكن دخول القنوات المغلقة دون إذن
+
+TikTok: الالتزام بالسرعة الآمنة لتجنب الحظر
+
+Google Business: إدارة حدود الكوتا بذكاء (Rate Limits)
+
+Output
+وحدات تجميع متوافقة مع البنية الحالية
+
+تغطية وظيفية متكاملة لجميع المنصات
+
+إعداد كامل للربط في بيئة Docker
+
+data_collector/collectors/
+├── snapchat_collector.py
+├── telegram_collector.py
+├── tiktok_collector.py
+└── google_business_collector.py
+Kafka Topics
+raw_social_data
+
+raw_scraped_data
+ملاحظات هامة:
+TikTok: تجنب الحظر من خلال التحكم في السرعة
+
+Google: التعامل مع Rate Limits
+
+
+
+
+
+
+"""

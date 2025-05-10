@@ -1,0 +1,119 @@
+## Prompt 6: Flutter Web Frontend with UAE PASS, Multilingual Support & UAE Identity Design
+
+Develop a Flutter Web application named `socmint_dashboard` with UAE government-compliant design, UAE PASS authentication, and multi-role dashboards.
+
+### Objective
+
+Deliver a responsive, secure frontend that connects to SOCMINT backend services via REST APIs, supports Arabic/English/Farsi/Russian, and provides a professional UAE-branded interface.
+
+### Project Structure
+
+frontend_flutter/
+
+├── Dockerfile
+
+├── nginx.conf
+
+├── pubspec.yaml
+
+├── lib/
+
+│   ├── main.dart
+
+│   ├── app.dart
+
+│   ├── config/app_routes.dart
+
+│   ├── services/api_service.dart
+
+│   ├── services/auth_service.dart
+
+│   ├── localization/
+
+│   │   ├── intl_ar.arb
+
+│   │   ├── intl_en.arb
+
+│   │   ├── intl_fa.arb
+
+│   │   └── intl_ru.arb
+
+│   ├── screens/
+
+│   │   ├── login.dart
+
+│   │   ├── dashboard_admin.dart
+
+│   │   ├── dashboard_analyst.dart
+
+│   │   ├── dashboard_viewer.dart
+
+│   │   └── data_source_manager.dart
+
+│   └── widgets/
+
+│       ├── navigation_drawer.dart
+
+│       └── uae_button.dart
+
+### Functional Requirements
+
+1. **Authentication**
+
+- JWT login + role-based routing
+
+- Optional UAE PASS OAuth2 login
+
+- Store JWT securely (encrypted local storage)
+
+2. **Multilingual Support**
+
+- RTL for Arabic & Farsi
+
+- LTR for English & Russian
+
+- Use `intl` and `flutter_localizations`
+
+3. **Role-Specific Dashboards**
+
+- Admin: Manage sources, users, full access
+
+- Analyst: View analytics, alerts, reports
+
+- Viewer: Read-only insights & trends
+
+4. **Design System**
+
+- UAE Design guidelines
+
+- Use Dubai/Noto Kufi fonts
+
+- Rounded buttons, dark sidebar, light/dark mode toggle
+
+5. **API Integration**
+
+- Connect via Dio to:
+
+- `/auth`, `/analytics`, `/timeline`, `/posts`, `/alerts`, `/reports`
+
+- Token-based header injection and error handling
+
+### Dockerfile & Deployment
+
+- Base image: `cirruslabs/flutter:stable-web`
+
+- Run: `flutter build web`
+
+- Serve via nginx (port 80)
+
+### Output
+
+- Secure, responsive, multilingual Flutter frontend
+
+- Role-based views tied to SOCMINT backend
+
+- UAE PASS integration optional but ready
+
+- Docker-ready frontend with full branding
+
+"""

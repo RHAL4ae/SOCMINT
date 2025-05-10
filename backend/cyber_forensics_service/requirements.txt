@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+elasticsearch>=8.0.0
+psycopg2-binary
+web3
+cryptography
+python-dotenv

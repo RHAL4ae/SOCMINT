@@ -1,0 +1,111 @@
+Design a scalable, modular infrastructure for the SOCMINT SaaS platform using Docker Compose.
+
+Deploy a full backend infrastructure using microservices to support OSINT ingestion, AI analytics, financial crime detection, and forensic investigations. Ensure each component runs in an isolated container and communicates over a secure Docker network.
+
+1. **Elasticsearch**
+
+- Port: 9200
+
+- Cluster config via environment variables
+
+- Persistent volume: `esdata`
+
+2. **PostgreSQL**
+
+- Port: 5432
+
+- Credentials: `user=socmint`, `password=securepassword`, `db=socmint_db`
+
+- Volume: `pgdata`
+
+3. **Neo4j**
+
+- Ports: 7474 (HTTP), 7687 (Bolt)
+
+- Default credentials
+
+- Volume: `neo4jdata`
+
+4. **Apache Kafka + Zookeeper**
+
+- Kafka port: 9092
+
+- Zookeeper port: 2181
+
+- Network alias: `kafka`
+
+5. **Apache Spark (Standalone)**
+
+- Port: 8080
+
+- Include master and worker nodes if needed
+
+6. **FastAPI Backend (Microservice Ready)**
+
+- Folder: `./backend/`
+
+- Port: 8000
+
+- Built with Python 3.10+, uvicorn
+
+7. **Frontend Web (Placeholder)**
+
+- Folder: `./frontend/`
+
+- Port: 80
+
+- Served via nginx or Flutter in later steps
+
+8. **TOR Proxy**
+
+- Port: 9050
+
+- Expose SOCKS5 proxy for dark web scraping
+
+9. **Docker Network**
+
+- All services should be attached to `socmint_network`
+
+### Folder Structure
+
+socmint-platform/
+
+├── docker-compose.yml
+
+├── backend/
+
+├── frontend/
+
+├── tor/
+
+│ └── Dockerfile
+
+├── .env
+
+└── README.md
+
+### docker-compose.yml Expectations
+
+- All services configured with:
+
+- restart policy
+
+- named volumes
+
+- environment variables from `.env`
+
+- network alias
+
+- Only backend and frontend exposed to the host
+
+- Logging and healthchecks optional but recommended
+
+### Output
+
+- Fully functional `docker-compose.yml`
+
+- Dockerfiles (for tor, backend, and optionally frontend)
+
+- Sample `.env` with secure values
+
+- `README.md` with build and run instructions
