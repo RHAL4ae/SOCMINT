@@ -43,6 +43,9 @@ RUN echo "SocksPort 9050" >> /etc/tor/torrc \
 # Copy application code
 COPY . .
 
+# Set environment variables
+ENV PYTHONPATH=/app
+
 # Create a non-root user to run the application
 RUN useradd -m appuser
 RUN chown -R appuser:appuser /app

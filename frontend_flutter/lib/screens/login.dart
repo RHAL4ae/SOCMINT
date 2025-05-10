@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import '../localization/intl_localizations.dart';
+import '../widgets/uaepass_login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -96,6 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           : Text(loc?.translate('login') ?? 'Login'),
                     ),
                   ),
+                  const SizedBox(height: 16),
+                  const UAEPassLoginButton(),
                   const SizedBox(height: 16),
                   OutlinedButton(
                     onPressed: () async {

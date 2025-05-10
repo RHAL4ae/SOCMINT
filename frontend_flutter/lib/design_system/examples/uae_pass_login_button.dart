@@ -78,12 +78,12 @@ class UAEPassLoginCard extends StatelessWidget {
           Container(
             width: 120,
             height: 60,
-            color: SOCMINTColors.rhalDark,
+            color: SOCMINTColors.dark,
             child: Column(
               children: [
                 Container(
                   height: 8,
-                  color: SOCMINTColors.rhalGreen,
+                  color: SOCMINTColors.primary,
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -92,7 +92,7 @@ class UAEPassLoginCard extends StatelessWidget {
                     fontFamily: 'Dubai',
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: SOCMINTColors.white,
+                    color: SOCMINTColors.secondary,
                   ),
                   textDirection: TextDirection.rtl,
                 ),

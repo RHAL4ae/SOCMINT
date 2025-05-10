@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// SOCMINT Design System - Color Palette
 /// 
@@ -6,20 +7,17 @@ import 'package:flutter/material.dart';
 /// and typography as defined in the design system documentation.
 class SOCMINTColors {
   // Primary
-  static const Color rhalGreen = Color(0xFF00A651);
-  static const Color rhalDark = Color(0xFF1A1A1A);
+  static const Color primary = Color(0xFF2E7D32); // Extracted green tone
+  static const Color secondary = Color(0xFFFFFFFF);
   
-  // Secondary
-  static const Color white = Color(0xFFFFFFFF);
+  // Accent
+  static const Color accent = Color(0xFFE31837); // Emirati flag red
+  static const Color dark = Color(0xFF121212);
+  
+  // Grays
   static const Color lightGray = Color(0xFFF5F5F5);
   static const Color mediumGray = Color(0xFFCCCCCC);
   static const Color darkGray = Color(0xFF666666);
-  
-  // Accent
-  static const Color uaeRed = Color(0xFFEF3340);
-  static const Color success = Color(0xFF4CAF50);
-  static const Color warning = Color(0xFFFFC107);
-  static const Color info = Color(0xFF2196F3);
 }
 
 /// SOCMINT Design System - Typography
@@ -27,117 +25,77 @@ class SOCMINTColors {
 /// Text styles for both Arabic and English languages
 class SOCMINTTextStyles {
   // Arabic Text Styles
-  static const TextStyle arabicH1 = TextStyle(
-    fontFamily: 'Dubai',
+  static TextStyle arabicH1 = GoogleFonts.notoKufiArabic(
     fontSize: 32,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     height: 1.2,
   );
   
-  static const TextStyle arabicH2 = TextStyle(
-    fontFamily: 'Dubai',
+  static TextStyle arabicH2 = GoogleFonts.notoKufiArabic(
     fontSize: 24,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     height: 1.3,
   );
   
-  static const TextStyle arabicH3 = TextStyle(
-    fontFamily: 'Dubai',
+  static TextStyle arabicH3 = GoogleFonts.notoKufiArabic(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     height: 1.4,
   );
   
-  static const TextStyle arabicH4 = TextStyle(
-    fontFamily: 'Dubai',
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    height: 1.4,
-  );
-  
-  static const TextStyle arabicBody1 = TextStyle(
-    fontFamily: 'Dubai',
+  static TextStyle arabicH4 = GoogleFonts.notoKufiArabic(
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     height: 1.5,
   );
   
-  static const TextStyle arabicBody2 = TextStyle(
-    fontFamily: 'Dubai',
+  static TextStyle arabicBody1 = GoogleFonts.notoKufiArabic(
     fontSize: 14,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.normal,
     height: 1.5,
   );
   
-  static const TextStyle arabicCaption = TextStyle(
-    fontFamily: 'Dubai',
+  static TextStyle arabicBody2 = GoogleFonts.notoKufiArabic(
     fontSize: 12,
-    fontWeight: FontWeight.w400,
-    height: 1.4,
-  );
-  
-  static const TextStyle arabicButton = TextStyle(
-    fontFamily: 'Dubai',
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    height: 1.2,
+    fontWeight: FontWeight.normal,
+    height: 1.5,
   );
   
   // English Text Styles
-  static const TextStyle englishH1 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle englishH1 = GoogleFonts.montserrat(
     fontSize: 32,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     height: 1.2,
   );
   
-  static const TextStyle englishH2 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle englishH2 = GoogleFonts.montserrat(
     fontSize: 24,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
     height: 1.3,
   );
   
-  static const TextStyle englishH3 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle englishH3 = GoogleFonts.montserrat(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     height: 1.4,
   );
   
-  static const TextStyle englishH4 = TextStyle(
-    fontFamily: 'Montserrat',
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    height: 1.4,
-  );
-  
-  static const TextStyle englishBody1 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle englishH4 = GoogleFonts.montserrat(
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     height: 1.5,
   );
   
-  static const TextStyle englishBody2 = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle englishBody1 = GoogleFonts.montserrat(
     fontSize: 14,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.normal,
     height: 1.5,
   );
   
-  static const TextStyle englishCaption = TextStyle(
-    fontFamily: 'Montserrat',
+  static TextStyle englishBody2 = GoogleFonts.montserrat(
     fontSize: 12,
-    fontWeight: FontWeight.w400,
-    height: 1.4,
-  );
-  
-  static const TextStyle englishButton = TextStyle(
-    fontFamily: 'Montserrat',
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    height: 1.2,
+    fontWeight: FontWeight.normal,
+    height: 1.5,
   );
 }
 
@@ -148,98 +106,119 @@ class SOCMINTTheme {
   // Light Theme
   static ThemeData lightTheme() {
     return ThemeData(
-      primaryColor: SOCMINTColors.rhalGreen,
-      scaffoldBackgroundColor: SOCMINTColors.lightGray,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: SOCMINTColors.white,
-        foregroundColor: SOCMINTColors.rhalDark,
-        elevation: 1,
+      primaryColor: SOCMINTColors.primary,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: SOCMINTColors.primary,
+        primary: SOCMINTColors.primary,
+        secondary: SOCMINTColors.secondary,
+        error: SOCMINTColors.accent,
+        brightness: Brightness.light,
       ),
-      cardTheme: const CardTheme(
-        color: SOCMINTColors.white,
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
+      textTheme: TextTheme(
+        headlineLarge: SOCMINTTextStyles.arabicH1,
+        headlineMedium: SOCMINTTextStyles.arabicH2,
+        headlineSmall: SOCMINTTextStyles.arabicH3,
+        titleLarge: SOCMINTTextStyles.arabicH4,
+        bodyLarge: SOCMINTTextStyles.arabicBody1,
+        bodyMedium: SOCMINTTextStyles.arabicBody2,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: SOCMINTColors.rhalGreen,
-          foregroundColor: SOCMINTColors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          backgroundColor: SOCMINTColors.primary,
+          foregroundColor: SOCMINTColors.secondary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: SOCMINTTextStyles.englishButton,
         ),
       ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: SOCMINTColors.rhalGreen,
-          side: const BorderSide(color: SOCMINTColors.rhalGreen),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          textStyle: SOCMINTTextStyles.englishButton,
+      cardTheme: CardTheme(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: SOCMINTColors.rhalGreen,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          textStyle: SOCMINTTextStyles.englishButton,
-        ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: SOCMINTColors.dark,
+        elevation: 0,
+        titleTextStyle: SOCMINTTextStyles.arabicH2,
       ),
+      scaffoldBackgroundColor: SOCMINTColors.secondary,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: SOCMINTColors.white,
+        fillColor: SOCMINTColors.lightGray,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: SOCMINTColors.mediumGray),
+          borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: SOCMINTColors.mediumGray),
+          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: SOCMINTColors.rhalGreen),
+          borderSide: BorderSide(color: SOCMINTColors.primary),
         ),
-        errorBorder: OutlineInputBorder(
+      ),
+      dialogTheme: DialogTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: SOCMINTColors.secondary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+        ),
+      ),
+      dividerTheme: DividerThemeData(
+        color: SOCMINTColors.mediumGray,
+        thickness: 1,
+      ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: SOCMINTColors.uaeRed),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor: SOCMINTColors.primary,
+        unselectedItemColor: SOCMINTColors.darkGray,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+      ),
+      tabBarTheme: TabBarTheme(
+        labelColor: SOCMINTColors.primary,
+        unselectedLabelColor: SOCMINTColors.darkGray,
+        indicator: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: SOCMINTColors.primary,
+        ),
+      ),
+      drawerTheme: DrawerThemeData(
+        backgroundColor: SOCMINTColors.dark,
+      ),
+      listTileTheme: ListTileThemeData(
+        iconColor: SOCMINTColors.primary,
+        textColor: SOCMINTColors.secondary,
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.all(SOCMINTColors.primary),
+        trackColor: WidgetStateProperty.all(SOCMINTColors.mediumGray),
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: WidgetStateProperty.resolveWith<Color>(
-          (Set<WidgetState> states) {
-            if (states.contains(WidgetState.disabled)) {
-              return SOCMINTColors.mediumGray;
-            }
-            if (states.contains(WidgetState.selected)) {
-              return SOCMINTColors.rhalGreen;
-            }
-            return SOCMINTColors.white;
-          },
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        fillColor: WidgetStateProperty.all(SOCMINTColors.primary),
+        checkColor: WidgetStateProperty.all(SOCMINTColors.secondary),
       ),
-      dividerTheme: const DividerThemeData(
-        color: SOCMINTColors.lightGray,
-        thickness: 1,
-        space: 1,
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.all(SOCMINTColors.primary),
       ),
-      colorScheme: ColorScheme.light(
-        primary: SOCMINTColors.rhalGreen,
-        secondary: SOCMINTColors.rhalGreen,
-        error: SOCMINTColors.uaeRed,
-        surface: SOCMINTColors.white,
-        onPrimary: SOCMINTColors.white,
-        onSecondary: SOCMINTColors.white,
-        onError: SOCMINTColors.white,
-        onSurface: SOCMINTColors.rhalDark,
+      sliderTheme: SliderThemeData(
+        activeTrackColor: SOCMINTColors.primary,
+        inactiveTrackColor: SOCMINTColors.mediumGray,
+        thumbColor: SOCMINTColors.primary,
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: SOCMINTColors.primary,
       ),
     );
   }
@@ -247,12 +226,12 @@ class SOCMINTTheme {
   // Dark Theme
   static ThemeData darkTheme() {
     return ThemeData(
-      primaryColor: SOCMINTColors.rhalGreen,
-      scaffoldBackgroundColor: SOCMINTColors.rhalDark,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF212121),
-        foregroundColor: SOCMINTColors.white,
-        elevation: 1,
+      primaryColor: SOCMINTColors.primary,
+      scaffoldBackgroundColor: SOCMINTColors.dark,
+      appBarTheme: AppBarTheme(
+        backgroundColor: SOCMINTColors.dark,
+        elevation: 0,
+        titleTextStyle: SOCMINTTextStyles.arabicH2,
       ),
       cardTheme: const CardTheme(
         color: Color(0xFF212121),
@@ -263,31 +242,31 @@ class SOCMINTTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: SOCMINTColors.rhalGreen,
-          foregroundColor: SOCMINTColors.white,
+          backgroundColor: SOCMINTColors.primary,
+          foregroundColor: SOCMINTColors.secondary,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: SOCMINTTextStyles.englishButton,
+          textStyle: SOCMINTTextStyles.englishBody1,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: SOCMINTColors.rhalGreen,
-          side: const BorderSide(color: SOCMINTColors.rhalGreen),
+          foregroundColor: SOCMINTColors.primary,
+          side: const BorderSide(color: SOCMINTColors.primary),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: SOCMINTTextStyles.englishButton,
+          textStyle: SOCMINTTextStyles.englishBody1,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: SOCMINTColors.rhalGreen,
+          foregroundColor: SOCMINTColors.primary,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          textStyle: SOCMINTTextStyles.englishButton,
+          textStyle: SOCMINTTextStyles.englishBody1,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -303,11 +282,11 @@ class SOCMINTTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: SOCMINTColors.rhalGreen),
+          borderSide: const BorderSide(color: SOCMINTColors.primary),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: SOCMINTColors.uaeRed),
+          borderSide: const BorderSide(color: SOCMINTColors.accent),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
@@ -318,7 +297,7 @@ class SOCMINTTheme {
               return SOCMINTColors.darkGray;
             }
             if (states.contains(WidgetState.selected)) {
-              return SOCMINTColors.rhalGreen;
+              return SOCMINTColors.primary;
             }
             return const Color(0xFF212121);
           },
@@ -331,14 +310,13 @@ class SOCMINTTheme {
         space: 1,
       ),
       colorScheme: ColorScheme.dark(
-        primary: SOCMINTColors.rhalGreen,
-        secondary: SOCMINTColors.rhalGreen,
-        error: SOCMINTColors.uaeRed,
+        primary: SOCMINTColors.primary,
+        secondary: SOCMINTColors.primary,
+        error: SOCMINTColors.accent,
         surface: const Color(0xFF212121),
-        onPrimary: SOCMINTColors.white,
-        onSecondary: SOCMINTColors.white,
-        onError: SOCMINTColors.white,
-        onSurface: SOCMINTColors.white,
+        onPrimary: SOCMINTColors.secondary,
+        onSecondary: SOCMINTColors.secondary,
+        onSurface: SOCMINTColors.secondary,
       ),
     );
   }

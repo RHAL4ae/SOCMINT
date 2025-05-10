@@ -51,7 +51,7 @@ class RHALLogo extends StatelessWidget {
     
     final Color barColor = isMonochrome
         ? textColor
-        : SOCMINTColors.rhalGreen;
+        : SOCMINTColors.primary;
     
     final Color backgroundColor = isReversed ? Colors.white : Colors.black;
     
@@ -76,7 +76,7 @@ class RHALLogo extends StatelessWidget {
               Text(
                 'رحّال',
                 style: TextStyle(
-                  fontFamily: 'Dubai',
+                  fontFamily: 'NotoKufiArabic',
                   fontSize: textSize,
                   fontWeight: FontWeight.bold,
                   color: textColor,
@@ -93,7 +93,7 @@ class RHALLogo extends StatelessWidget {
           Text(
             'عجمان للتقنيات المتقدمة',
             style: TextStyle(
-              fontFamily: 'Dubai',
+              fontFamily: 'NotoKufiArabic',
               fontSize: taglineSize,
                 fontWeight: FontWeight.w500,
               color: textColor,
@@ -155,7 +155,7 @@ class RHALSquareLogo extends StatelessWidget {
     
     final Color barColor = isMonochrome
         ? textColor
-        : SOCMINTColors.rhalGreen;
+        : SOCMINTColors.primary;
     
     final Color backgroundColor = isReversed ? Colors.white : Colors.black;
     
@@ -178,7 +178,7 @@ class RHALSquareLogo extends StatelessWidget {
           Text(
             'رحّال',
             style: TextStyle(
-              fontFamily: 'Dubai',
+              fontFamily: 'NotoKufiArabic',
               fontSize: textSize,
               fontWeight: FontWeight.bold,
               color: textColor,
@@ -208,7 +208,7 @@ class RHALAppIcon extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: SOCMINTColors.rhalGreen,
+        color: SOCMINTColors.primary,
         borderRadius: BorderRadius.circular(size * 0.2), // 20% of size for rounded corners
       ),
       child: Center(

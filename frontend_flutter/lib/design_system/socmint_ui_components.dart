@@ -27,16 +27,16 @@ class SOCMINTPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     final TextStyle textStyle = isRTL 
-        ? SOCMINTTextStyles.arabicButton 
-        : SOCMINTTextStyles.englishButton;
+        ? SOCMINTTextStyles.arabicBody1 
+        : SOCMINTTextStyles.englishBody1;
     
     return SizedBox(
       width: isFullWidth ? double.infinity : null,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: SOCMINTColors.rhalGreen,
-          foregroundColor: SOCMINTColors.white,
+          backgroundColor: SOCMINTColors.primary,
+          foregroundColor: SOCMINTColors.secondary,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -49,17 +49,17 @@ class SOCMINTPrimaryButton extends StatelessWidget {
                 height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(SOCMINTColors.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(SOCMINTColors.secondary),
                 ),
               )
             : Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (icon != null && !isRTL) Icon(icon, size: 18, color: SOCMINTColors.white),
+                  if (icon != null && !isRTL) Icon(icon, size: 18, color: Colors.white),
                   if (icon != null && !isRTL) const SizedBox(width: 8),
                   Text(text, style: textStyle),
                   if (icon != null && isRTL) const SizedBox(width: 8),
-                  if (icon != null && isRTL) Icon(icon, size: 18, color: SOCMINTColors.white),
+                  if (icon != null && isRTL) Icon(icon, size: 18, color: Colors.white),
                 ],
               ),
       ),
@@ -88,16 +88,16 @@ class SOCMINTSecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     final TextStyle textStyle = isRTL 
-        ? SOCMINTTextStyles.arabicButton 
-        : SOCMINTTextStyles.englishButton;
+        ? SOCMINTTextStyles.arabicBody1 
+        : SOCMINTTextStyles.englishBody1;
     
     return SizedBox(
       width: isFullWidth ? double.infinity : null,
       child: OutlinedButton(
         onPressed: isLoading ? null : onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: SOCMINTColors.rhalGreen,
-          side: const BorderSide(color: SOCMINTColors.rhalGreen),
+          foregroundColor: SOCMINTColors.primary,
+          side: const BorderSide(color: SOCMINTColors.primary),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -109,7 +109,7 @@ class SOCMINTSecondaryButton extends StatelessWidget {
                 height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(SOCMINTColors.rhalGreen),
+                  valueColor: AlwaysStoppedAnimation<Color>(SOCMINTColors.primary),
                 ),
               )
             : Row(
@@ -144,13 +144,13 @@ class SOCMINTTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     final TextStyle textStyle = isRTL 
-        ? SOCMINTTextStyles.arabicButton 
-        : SOCMINTTextStyles.englishButton;
+        ? SOCMINTTextStyles.arabicBody1 
+        : SOCMINTTextStyles.englishBody1;
     
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        foregroundColor: SOCMINTColors.rhalGreen,
+        foregroundColor: SOCMINTColors.primary,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
       child: Row(
@@ -197,7 +197,7 @@ class SOCMINTCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
+              color: Colors.black.withValues(alpha: 26),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -301,27 +301,27 @@ class SOCMINTAlert extends StatelessWidget {
     
     switch (type) {
       case AlertType.success:
-        backgroundColor = SOCMINTColors.success.withValues(alpha: 0.1);
-        borderColor = SOCMINTColors.success;
-        iconColor = SOCMINTColors.success;
+        backgroundColor = SOCMINTColors.primary.withValues(alpha: 51);
+        borderColor = SOCMINTColors.primary;
+        iconColor = SOCMINTColors.primary;
         icon = Icons.check_circle;
         break;
       case AlertType.warning:
-        backgroundColor = SOCMINTColors.warning.withValues(alpha: 0.1);
-        borderColor = SOCMINTColors.warning;
-        iconColor = SOCMINTColors.warning;
+        backgroundColor = SOCMINTColors.primary.withValues(alpha: 18);
+        borderColor = SOCMINTColors.primary.withValues(alpha: 179);
+        iconColor = SOCMINTColors.primary.withValues(alpha: 179);
         icon = Icons.warning;
         break;
       case AlertType.error:
-        backgroundColor = SOCMINTColors.uaeRed.withValues(alpha: 0.1);
-        borderColor = SOCMINTColors.uaeRed;
-        iconColor = SOCMINTColors.uaeRed;
+        backgroundColor = SOCMINTColors.accent.withValues(alpha: 26);
+        borderColor = SOCMINTColors.accent;
+        iconColor = SOCMINTColors.accent;
         icon = Icons.error;
         break;
       case AlertType.info:
-        backgroundColor = SOCMINTColors.info.withValues(alpha: 0.1);
-        borderColor = SOCMINTColors.info;
-        iconColor = SOCMINTColors.info;
+        backgroundColor = SOCMINTColors.primary.withValues(alpha: 13);
+        borderColor = SOCMINTColors.primary.withValues(alpha: 204);
+        iconColor = SOCMINTColors.primary.withValues(alpha: 204);
         icon = Icons.info;
         break;
     }
@@ -369,7 +369,7 @@ class SOCMINTAlert extends StatelessWidget {
               onPressed: onClose,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 153),
             ),
           ],
         ],
@@ -444,7 +444,7 @@ class SOCMINTAvatar extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: backgroundColor ?? SOCMINTColors.rhalGreen,
+        color: backgroundColor ?? SOCMINTColors.primary,
         image: imageUrl != null
             ? DecorationImage(
                 image: NetworkImage(imageUrl!),
@@ -457,7 +457,7 @@ class SOCMINTAvatar extends StatelessWidget {
               child: Text(
                 initials!,
                 style: TextStyle(
-                  color: SOCMINTColors.white,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: size * 0.4,
                 ),
@@ -484,7 +484,7 @@ class SOCMINTBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
-    final Color badgeColor = color ?? SOCMINTColors.rhalGreen;
+    final Color badgeColor = color ?? SOCMINTColors.primary;
     
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -495,7 +495,7 @@ class SOCMINTBadge extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: (isRTL ? SOCMINTTextStyles.arabicCaption : SOCMINTTextStyles.englishCaption).copyWith(
+        style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
           color: badgeColor,
           fontSize: fontSize,
         ),
@@ -559,7 +559,7 @@ class SOCMINTEmptyState extends StatelessWidget {
             Icon(
               icon,
               size: 64,
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 77),
             ),
             const SizedBox(height: 16),
             if (title != null) ...[  
@@ -575,7 +575,7 @@ class SOCMINTEmptyState extends StatelessWidget {
             Text(
               message,
               style: (isRTL ? SOCMINTTextStyles.arabicBody1 : SOCMINTTextStyles.englishBody1).copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 179),
               ),
               textAlign: TextAlign.center,
             ),

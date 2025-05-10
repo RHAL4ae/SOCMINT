@@ -57,7 +57,7 @@ class SidebarExample extends StatelessWidget {
     
     return Container(
       width: 240,
-      color: SOCMINTColors.rhalDark,
+      color: SOCMINTColors.dark,
       child: Column(
         children: [
           // Logo area
@@ -70,21 +70,21 @@ class SidebarExample extends StatelessWidget {
                 Container(
                   width: 32,
                   height: 32,
-                  color: Colors.black,
+                  color: SOCMINTColors.primary,
                   child: Column(
                     children: [
                       Container(
                         height: 6,
-                        color: SOCMINTColors.rhalGreen,
+                        color: SOCMINTColors.primary,
                       ),
                       const Spacer(),
                       const Text(
                         'رحّال',
                         style: TextStyle(
-                          fontFamily: 'Dubai',
+                          fontFamily: 'NotoKufiArabic',
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: SOCMINTColors.white,
+                          color: SOCMINTColors.primary,
                         ),
                         textAlign: TextAlign.center,
                         textDirection: TextDirection.rtl,
@@ -97,7 +97,7 @@ class SidebarExample extends StatelessWidget {
                 Text(
                   'SOCMINT',
                   style: SOCMINTTextStyles.englishH3.copyWith(
-                    color: SOCMINTColors.white,
+                    color: SOCMINTColors.primary,
                   ),
                 ),
               ],
@@ -130,12 +130,12 @@ class SidebarExample extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: isSelected ? SOCMINTColors.rhalGreen.withAlpha((0.2 * 255).toInt()) : Colors.transparent,
+        color: isSelected ? SOCMINTColors.primary.withValues(alpha: 51) : SOCMINTColors.dark,
         borderRadius: BorderRadius.circular(8),
         border: isSelected 
             ? Border(
                 left: BorderSide(
-                  color: SOCMINTColors.rhalGreen,
+                  color: SOCMINTColors.secondary,
                   width: 4,
                 ),
               )
@@ -152,7 +152,7 @@ class SidebarExample extends StatelessWidget {
               children: [
                 Icon(
                   icon,
-                  color: isSelected ? SOCMINTColors.rhalGreen : SOCMINTColors.white,
+                  color: isSelected ? SOCMINTColors.primary : SOCMINTColors.secondary,
                   size: 20,
                 ),
                 const SizedBox(width: 16),
@@ -162,7 +162,7 @@ class SidebarExample extends StatelessWidget {
                     fontFamily: Directionality.of(context) == TextDirection.rtl ? 'Dubai' : 'Montserrat',
                     fontSize: 14,
                     fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                    color: isSelected ? SOCMINTColors.rhalGreen : SOCMINTColors.white,
+                    color: isSelected ? SOCMINTColors.primary : SOCMINTColors.secondary,
                   ),
                 ),
               ],
@@ -190,7 +190,7 @@ class TopBarExample extends StatelessWidget {
         color: Theme.of(context).appBarTheme.backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withAlpha((0.05 * 255).toInt()),
+            color: SOCMINTColors.dark.withValues(alpha: 12),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -214,8 +214,8 @@ class TopBarExample extends StatelessWidget {
             height: 40,
             decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.light 
-                  ? SOCMINTColors.lightGray 
-                  : SOCMINTColors.rhalDark.withAlpha((0.3 * 255).toInt()),
+                  ? SOCMINTColors.primary.withValues(alpha: 51) 
+                  : SOCMINTColors.dark.withValues(alpha: 76),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -224,13 +224,13 @@ class TopBarExample extends StatelessWidget {
                 Icon(
                   Icons.search,
                   size: 20,
-                  color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 127),
                 ),
                 const SizedBox(width: 8),
                 Text(
                   isRTL ? 'بحث...' : 'Search...',
                   style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 127),
                   ),
                 ),
               ],
@@ -318,28 +318,28 @@ class DashboardContentExample extends StatelessWidget {
                 isRTL ? 'المصادر النشطة' : 'Active Sources',
                 '24',
                 Icons.cloud_done,
-                SOCMINTColors.rhalGreen,
+                SOCMINTColors.primary,
               ),
               _buildStatCard(
                 context,
                 isRTL ? 'الكيانات المكتشفة' : 'Entities Discovered',
                 '1,284',
                 Icons.people,
-                SOCMINTColors.info,
+                SOCMINTColors.primary,
               ),
               _buildStatCard(
                 context,
                 isRTL ? 'التنبيهات الحرجة' : 'Critical Alerts',
                 '7',
                 Icons.warning,
-                SOCMINTColors.uaeRed,
+                SOCMINTColors.accent,
               ),
               _buildStatCard(
                 context,
                 isRTL ? 'التقارير المولدة' : 'Reports Generated',
                 '32',
                 Icons.description,
-                SOCMINTColors.darkGray,
+                SOCMINTColors.dark,
               ),
             ],
           ),
@@ -365,7 +365,7 @@ class DashboardContentExample extends StatelessWidget {
                   isRTL ? 'تم تحديد حساب جديد مرتبط بنشاط مشبوه سابق' : 'New account identified linked to previous suspicious activity',
                   '2 hours ago',
                   Icons.security,
-                  SOCMINTColors.uaeRed,
+                  SOCMINTColors.accent,
                 ),
                 const SOCMINTDivider(),
                 _buildActivityItem(
@@ -374,7 +374,7 @@ class DashboardContentExample extends StatelessWidget {
                   isRTL ? 'تم الانتهاء من تحليل الشبكة لـ 156 كيان' : 'Network analysis completed for 156 entities',
                   '5 hours ago',
                   Icons.share,
-                  SOCMINTColors.info,
+                  SOCMINTColors.primary,
                 ),
                 const SOCMINTDivider(),
                 _buildActivityItem(
@@ -383,7 +383,7 @@ class DashboardContentExample extends StatelessWidget {
                   isRTL ? 'تم إنشاء تقرير التحليل الأسبوعي وهو جاهز للمراجعة' : 'Weekly analysis report has been generated and is ready for review',
                   '1 day ago',
                   Icons.description,
-                  SOCMINTColors.rhalGreen,
+                  SOCMINTColors.primary,
                 ),
               ],
             ),
@@ -515,7 +515,7 @@ class DashboardContentExample extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: color.withAlpha((0.1 * 255).toInt()),
+                  color: color.withValues(alpha: 26),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
@@ -527,7 +527,7 @@ class DashboardContentExample extends StatelessWidget {
               const Spacer(),
               Icon(
                 Icons.more_vert,
-                color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 127),
                 size: 20,
               ),
             ],
@@ -543,7 +543,7 @@ class DashboardContentExample extends StatelessWidget {
           Text(
             title,
             style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withAlpha((0.7 * 255).toInt()),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 179),
             ),
           ),
         ],
@@ -562,7 +562,7 @@ class DashboardContentExample extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: color.withAlpha((0.1 * 255).toInt()),
+              color: color.withValues(alpha: 26),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
@@ -586,7 +586,7 @@ class DashboardContentExample extends StatelessWidget {
                 Text(
                   description,
                   style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withAlpha((0.7 * 255).toInt()),
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 178),
                   ),
                 ),
               ],
@@ -595,8 +595,8 @@ class DashboardContentExample extends StatelessWidget {
           const SizedBox(width: 16),
           Text(
             time,
-            style: (isRTL ? SOCMINTTextStyles.arabicCaption : SOCMINTTextStyles.englishCaption).copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
+            style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 127),
             ),
           ),
         ],
@@ -629,7 +629,7 @@ class DashboardContentExample extends StatelessWidget {
                 Text(
                   info,
                   style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withAlpha((0.7 * 255).toInt()),
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 178),
                   ),
                 ),
               ],
@@ -638,10 +638,10 @@ class DashboardContentExample extends StatelessWidget {
           SOCMINTBadge(
             text: type,
             color: type == 'Person' || type == 'شخص' 
-                ? SOCMINTColors.info 
+                ? SOCMINTColors.primary 
                 : (type == 'Organization' || type == 'منظمة' 
-                    ? SOCMINTColors.rhalGreen 
-                    : SOCMINTColors.warning),
+                    ? SOCMINTColors.primary 
+                    : SOCMINTColors.accent),
           ),
         ],
       ),

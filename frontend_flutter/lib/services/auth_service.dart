@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_service.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:logger/logger.dart';
-import 'package:web/web.dart' as web; // Use this for web redirection
-// Only import dart:html for web
 
+import 'package:logger/logger.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'jwt_utils.dart';
 
 class AuthService {
@@ -40,32 +38,17 @@ class AuthService {
       final baseUrl = ApiService.baseUrl;
       
       // Redirect to UAE PASS login endpoint
-      final uaePassLoginUrl = '$baseUrl/auth/uaepass/login';
+      final uaePassLoginUrl = '$baseUrl/api/auth/uaepass/login';
       
       // Open the UAE PASS login URL in a web view or browser
-      // This will redirect to UAE PASS, then back to our callback URL
-      // For Flutter Web, we can use window.location.href
-      // For mobile, we would use url_launcher or in-app webview
-      if (kIsWeb) {
-        // Web implementation
-        web.window.location.href = uaePassLoginUrl;
-        return true; // This won't actually return as page will redirect
+      if (await canLaunchUrl(Uri.parse(uaePassLoginUrl))) {
+        await launchUrl(
+          Uri.parse(uaePassLoginUrl),
+          mode: LaunchMode.externalApplication,
+        );
+        return true;
       } else {
-        // Mobile implementation using url_launcher
-        try {
-          // Uncomment the following lines if url_launcher is added to pubspec.yaml
-          // import 'package:url_launcher/url_launcher.dart';
-          // if (await canLaunch(uaePassLoginUrl)) {
-          //   await launch(uaePassLoginUrl, forceSafariVC: true, forceWebView: true);
-          //   return true;
-          // } else {
-          //   throw Exception('Could not launch UAE PASS login URL');
-          // }
-          throw Exception('Mobile implementation not available yet. Please add url_launcher package.');
-        } catch (e) {
-          Logger().e('UAE PASS mobile login error: $e');
-          return false;
-        }
+        throw Exception('Could not launch UAE PASS login URL');
       }
     } catch (e) {
       Logger().e('UAE PASS login error: $e');
@@ -76,13 +59,11 @@ class AuthService {
   // Process UAE PASS callback and extract JWT
   static Future<bool> processUAEPassCallback(String url) async {
     try {
-      // Extract JWT from the callback URL or response
-      if (url.contains('jwt=')) {
-        final jwt = Uri.parse(url).queryParameters['jwt'];
-        if (jwt != null) {
-          await _storage.write(key: 'jwt_token', value: jwt);
-          return true;
-        }
+      // Extract JWT from the callback URL
+      final jwt = Uri.parse(url).queryParameters['access_token'];
+      if (jwt != null) {
+        await _storage.write(key: 'jwt_token', value: jwt);
+        return true;
       }
       return false;
     } catch (e) {

@@ -1,5 +1,11 @@
 # SOCMINT Backend - Consolidated Requirements
 # Aggregated from all backend submodules
+# UAE PASS Authentication Dependencies
+python-jose[cryptography]
+python-multipart
+openid-connect
+requests-oauthlib
+pyjwt[crypto]
 fastapi
 uvicorn
 kafka-python

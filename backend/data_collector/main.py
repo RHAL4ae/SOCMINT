@@ -165,45 +165,22 @@ async def collect_reddit(request: RedditRequest):
         return {"status": "success", "message": "Reddit data collection completed"}
     raise HTTPException(status_code=500, detail="Reddit data collection failed")
 
-@app.post("/collect/instagram")
-async def collect_instagram(request: InstagramRequest):
-    """Collect data from Instagram"""
-    result = await instagram_collector.collect(request.dict())
-    if result:
-        return {"status": "success", "message": "Instagram data collection completed"}
-    raise HTTPException(status_code=500, detail="Instagram data collection failed")
+    # Add tasks
+    for platform in config.platform_configs.keys():
+        config_data = config.get_config(platform)
+        if config_data:
+            collector.add_task({
+                'platform': platform,
+                'config': config_data
+            })
 
-@app.post("/collect/{platform}")
-async def collect_generic(platform: str, request: dict):
-    """Generic collection endpoint for any platform"""
-    if platform == "facebook":
-        result = await facebook_collector.collect(request)
-    elif platform == "twitter":
-        result = await twitter_collector.collect(request)
-    elif platform == "reddit":
-        result = await reddit_collector.collect(request)
-    elif platform == "instagram":
-        result = await instagram_collector.collect(request)
-    else:
-        raise HTTPException(status_code=400, detail=f"Unsupported platform: {platform}")
-    
-    if result:
-        return {"status": "success", "message": f"{platform.capitalize()} data collection completed"}
-    raise HTTPException(status_code=500, detail=f"{platform.capitalize()} data collection failed")
+    # Keep running until interrupted
+    try:
+        while True:
+            await asyncio.sleep(60)
+    except KeyboardInterrupt:
+        collector.stop()
 
-@app.post("/scrape")
-async def scrape_website(request: ScrapeRequest):
-    """Scrape a website"""
-    result = await regular_scraper.scrape(request.dict())
-    if result:
-        return {"status": "success", "message": "Web scraping completed"}
-    raise HTTPException(status_code=500, detail="Web scraping failed")
-
-@app.post("/scrape/darkweb")
-async def scrape_darkweb(request: DarkWebScrapeRequest):
-    """Scrape a dark web site"""
-    # Check TOR connection first
-    if not darkweb_scraper.check_status():
         raise HTTPException(status_code=503, detail="TOR connection not available")
     
     result = await darkweb_scraper.scrape(request.dict())
