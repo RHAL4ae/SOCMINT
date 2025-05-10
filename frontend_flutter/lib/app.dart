@@ -5,7 +5,7 @@ import 'localization/intl_localizations.dart';
 import 'config/app_routes.dart';
 
 class SocmintDashboardApp extends StatelessWidget {
-  const SocmintDashboardApp({Key? key}) : super(key: key);
+  const SocmintDashboardApp({super.key});
 
   @override
   Widget build(BuildContext context) {

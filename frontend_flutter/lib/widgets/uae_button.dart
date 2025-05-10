@@ -13,7 +13,7 @@ class UAEButton extends StatelessWidget {
   final Widget? icon;
 
   const UAEButton({
-    Key? key,
+    super.key,
     required this.label,
     this.onPressed,
     this.enabled = true,
@@ -22,7 +22,7 @@ class UAEButton extends StatelessWidget {
     this.textStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

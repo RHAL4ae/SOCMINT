@@ -26,14 +26,14 @@ class RHALLogo extends StatelessWidget {
   final bool showEnglishText;
   
   const RHALLogo({
-    Key? key,
+    super.key,
     this.height = 40,
     this.isReversed = false,
     this.isMonochrome = false,
     this.showBackground = true,
     this.showTagline = false,
     this.showEnglishText = false,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class RHALLogo extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Dubai',
               fontSize: taglineSize,
-              fontWeight: FontWeight.medium,
+                fontWeight: FontWeight.w500,
               color: textColor,
             ),
             textDirection: TextDirection.rtl,
@@ -135,12 +135,12 @@ class RHALSquareLogo extends StatelessWidget {
   final double borderRadius;
   
   const RHALSquareLogo({
-    Key? key,
+    super.key,
     this.size = 48,
     this.isReversed = false,
     this.isMonochrome = false,
     this.borderRadius = 0,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -198,9 +198,9 @@ class RHALAppIcon extends StatelessWidget {
   final double size;
   
   const RHALAppIcon({
-    Key? key,
+    super.key,
     this.size = 48,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {

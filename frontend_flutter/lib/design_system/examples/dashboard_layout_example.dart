@@ -8,7 +8,7 @@ import '../index.dart';
 /// top bar, and content area according to the design guidelines.
 
 class DashboardLayoutExample extends StatelessWidget {
-  const DashboardLayoutExample({Key? key}) : super(key: key);
+  const DashboardLayoutExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class DashboardLayoutExample extends StatelessWidget {
 class SidebarExample extends StatelessWidget {
   final int selectedIndex;
 
-  const SidebarExample({Key? key, this.selectedIndex = 0}) : super(key: key);
+  const SidebarExample({super.key, this.selectedIndex = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +177,7 @@ class SidebarExample extends StatelessWidget {
 
 /// Top Bar Example
 class TopBarExample extends StatelessWidget {
-  const TopBarExample({Key? key}) : super(key: key);
+  const TopBarExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -224,13 +224,13 @@ class TopBarExample extends StatelessWidget {
                 Icon(
                   Icons.search,
                   size: 20,
-                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                 ),
                 const SizedBox(width: 8),
                 Text(
                   isRTL ? 'بحث...' : 'Search...',
                   style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-                    color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                   ),
                 ),
               ],
@@ -282,7 +282,7 @@ class TopBarExample extends StatelessWidget {
 
 /// Dashboard Content Example
 class DashboardContentExample extends StatelessWidget {
-  const DashboardContentExample({Key? key}) : super(key: key);
+  const DashboardContentExample({super.key});
 
   @override
   Widget build(BuildContext context) {

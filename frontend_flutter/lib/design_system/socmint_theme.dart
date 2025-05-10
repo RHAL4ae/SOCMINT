@@ -213,12 +213,12 @@ class SOCMINTTheme {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        fillColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               return SOCMINTColors.mediumGray;
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               return SOCMINTColors.rhalGreen;
             }
             return SOCMINTColors.white;
@@ -235,12 +235,10 @@ class SOCMINTTheme {
         primary: SOCMINTColors.rhalGreen,
         secondary: SOCMINTColors.rhalGreen,
         error: SOCMINTColors.uaeRed,
-        background: SOCMINTColors.lightGray,
         surface: SOCMINTColors.white,
         onPrimary: SOCMINTColors.white,
         onSecondary: SOCMINTColors.white,
         onError: SOCMINTColors.white,
-        onBackground: SOCMINTColors.rhalDark,
         onSurface: SOCMINTColors.rhalDark,
       ),
     );
@@ -314,12 +312,12 @@ class SOCMINTTheme {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        fillColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               return SOCMINTColors.darkGray;
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               return SOCMINTColors.rhalGreen;
             }
             return const Color(0xFF212121);
@@ -336,12 +334,10 @@ class SOCMINTTheme {
         primary: SOCMINTColors.rhalGreen,
         secondary: SOCMINTColors.rhalGreen,
         error: SOCMINTColors.uaeRed,
-        background: SOCMINTColors.rhalDark,
         surface: const Color(0xFF212121),
         onPrimary: SOCMINTColors.white,
         onSecondary: SOCMINTColors.white,
         onError: SOCMINTColors.white,
-        onBackground: SOCMINTColors.white,
         onSurface: SOCMINTColors.white,
       ),
     );

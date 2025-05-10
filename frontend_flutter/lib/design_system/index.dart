@@ -2,6 +2,7 @@
 /// 
 /// This file exports all design system components and utilities
 /// for easy import throughout the application.
+library;
 
 export 'socmint_theme.dart';
 export 'socmint_ui_components.dart';

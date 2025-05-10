@@ -34,22 +34,26 @@ SOCMINT is a multi-service SaaS platform composed of:
 ## 🚀 Deployment Instructions
 
 1. Clone the repo:
+
 ```bash
 git clone https://github.com/rhal4ae/SOCMINT.git
 cd SOCMINT
 ```
 
 2. Create environment variables:
+
 ```bash
 cp .env.example .env
 ```
 
 3. Launch with Docker Compose:
+
 ```bash
 docker-compose up -d
 ```
 
 4. Access:
+
 - Frontend: `http://localhost`
 - Backend: `http://localhost:8000`
 - Elasticsearch: `http://localhost:9200`
@@ -141,6 +145,7 @@ SOCMINT/
 ## 🧠 AI Agents
 
 Supports modular LLM agents for:
+
 - Entity classification
 - Financial anomaly detection
 - Risk scoring via DeepSeek R1
@@ -162,14 +167,17 @@ Supports modular LLM agents for:
 
 Rami Kamel | SOCMINT Architect  
 Ajman, UAE 🇦🇪 | AI + Cybersecurity Fellow  
+
 # SOCMINT – منصة الاستخبارات السيادية متعددة القنوات
 
 ## المقدمة  
+
 SOCMINT هي منصة SaaS متكاملة لجمع وتحليل المعلومات المفتوحة (OSINT)، ومراقبة وسائل التواصل الاجتماعي، واكتشاف الجرائم المالية، والتحقيق الجنائي الرقمي، مدعومة بأحدث نماذج الذكاء الاصطناعي وقابلية النشر السريعة عبر الحاويات. تهدف المنصة إلى مساعدة المحققين وأخصائيي الأمن في الحصول على رؤى فورية من بيانات متنوعة وموزعة عبر واجهة موحدة ومؤمَّنة.
 
 ---
 
 ## المتطلبات البيئية  
+
 - **نظام التشغيل**: Ubuntu Server 20.04+ أو ما يعادله  
 - **حاويات**: Docker ≥20.10, Docker Compose ≥1.29  
 - **موارد النظام**: CPU 16-core, RAM 32 GB, SSD 512 GB  
@@ -179,6 +187,7 @@ SOCMINT هي منصة SaaS متكاملة لجمع وتحليل المعلوما
 ---
 
 ## الهيكلية العامة للمشروع  
+
 ```
 socmint-platform/
 ├── backend/
@@ -201,6 +210,7 @@ socmint-platform/
 ## تفاصيل الخدمات المصغرة (Microservices)
 
 ### 1. data_collector  
+
 - **وصف**: يجمع البيانات من APIs لوسائل التواصل (Facebook, Twitter, Reddit, Instagram, WhatsApp) ويجري Web Scraping، بما في ذلك ويب الظلام عبر TOR  
 - **نقاط النهاية**:  
   - `POST /collect/<platform>`  
@@ -210,6 +220,7 @@ socmint-platform/
 - **المخرجات**: تُدفع الرسائل إلى Kafka Topics: `raw_social_data` و `raw_scraped_data`  
 
 ### 2. ai_analytics_service  
+
 - **وصف**: يستهلك بيانات Kafka ويطبّق نماذج AraBERT/mBERT لتحليل المشاعر، واستخراج الكيانات، وتصنيف المواضيع، ثم يكتب النتائج إلى Elasticsearch و Neo4j  
 - **نقاط النهاية**:  
   - `GET /health`  
@@ -218,6 +229,7 @@ socmint-platform/
 - **مخرجات**: Elasticsearch index `processed_data`، ورسومات الكيانات في Neo4j  
 
 ### 3. financial_crime_service  
+
 - **وصف**: يستخدم Isolation Forest و KMeans لاكتشاف الأنماط غير المعتادة وتكوين مجموعات الكيانات المشبوهة، مع دفع النتائج إلى PostgreSQL و Neo4j  
 - **نقاط النهاية**:  
   - `POST /run-analysis`  
@@ -225,6 +237,7 @@ socmint-platform/
   - `GET /clusters`  
 
 ### 4. cyber_forensics_service  
+
 - **وصف**: يعيد بناء جداول زمنية للحوادث من Elasticsearch، يربط الأدلة الرقمية مع البيانات المالية، ويوثق سلامة التقارير عبر البلوكتشين (Ethereum/Hyperledger)  
 - **نقاط النهاية**:  
   - `POST /generate-report`  
@@ -233,6 +246,7 @@ socmint-platform/
   - `GET /health`  
 
 ### 5. social_media_manager  
+
 - **وصف**: يدمج Postiz App لتمكين كل مستأجر من جدولة ونشر المحتوى وقياس التفاعل بشكل معزول  
 - **نقاط النهاية**:  
   - `POST /connect/account`  
@@ -241,6 +255,7 @@ socmint-platform/
   - `GET /analytics/campaign/{id}`  
 
 ### 6. auth_uaepass  
+
 - **وصف**: يحقن تدفق OAuth2 Authorization Code مع PKCE عبر UAE PASS Sandbox لتوثيق المستخدمين بمستوى الثقة الوطني  
 - **نقاط النهاية**:  
   - `GET /auth/uaepass/login`  
@@ -251,6 +266,7 @@ socmint-platform/
 ---
 
 ## واجهة المستخدم – socmint_dashboard (Flutter)  
+
 - **الميزات**:  
   - دعم RTL/LTR لأربع لغات (عربي، إنجليزي، فارسي، روسي)  
   - تسجيل دخول قياسي وجزئي عبر UAE PASS  
@@ -263,6 +279,7 @@ socmint-platform/
 ---
 
 ## docker-compose.yml  
+
 ```yaml
 version: '3.8'
 services:
@@ -322,6 +339,7 @@ networks:
 ---
 
 ## ملف المتغيرات البيئة (.env)  
+
 ```
 # Kafka
 KAFKA_BROKER=kafka:9092
@@ -353,16 +371,21 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 ---
 
 ## خطوات التشغيل  
+
 1. **الاستنساخ**  
+
    ```bash
    git clone https://github.com/RHAL4ae/SOCMINT.git
    cd SOCMINT
    ```  
+
 2. **تكوين .env** كما هو موضح أعلاه.  
 3. **بناء الحاويات وتشغيلها**  
+
    ```bash
    docker-compose up --build -d
    ```  
+
 4. **التحقق**  
    - `curl http://localhost:8000/health`  
    - `curl http://localhost`  
@@ -371,13 +394,16 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 ---
 
 ## استراتيجية الاختبار  
+
 - **Kafka & قواعد البيانات**: تحقق من وجود Topics والجداول  
 - **Backend APIs**: استخدم Postman أو curl لاختبار جميع نقاط النهاية  
 - **واجهة Flutter**: تسجيل الدخول، تبديل اللغات، أدوار المستخدم  
 - **TOR**:  
+
   ```bash
   curl --socks5-hostname localhost:9050 http://check.torproject.org
   ```  
+
 - **التكامل النهائي**:  
   - توليد تقرير جنائي  
   - تحليل نصي  
@@ -387,6 +413,7 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 ---
 
 ## النشر وCI/CD  
+
 - ادماج مع GitHub Actions أو GitLab CI لخطوات: lint, test, build, deploy  
 - نشر إلى بيئة Kubernetes أو Docker Swarm عند الحاجة  
 - ربط SSL و Load Balancer  
@@ -394,6 +421,7 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 ---
 
 ## التوصيات الأمنية  
+
 - إجبار HTTPS لجميع الخدمات  
 - تشفير متغيرات البيئة الحساسة  
 - إدارة مفاتيح البلوكتشين في Secret Manager  
@@ -403,6 +431,7 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 ---
 
 ## المساهمة  
+
 1. فتح Issue لوصف الميزة أو العطل.  
 2. إنشاء فرع جديد `feature/…` أو `bugfix/…`.  
 3. تقديم Pull Request مع الوصف والاختبارات.  
@@ -434,7 +463,6 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 
 10. **Here's a prompt I want to improve:** [PASTE PROMPT]. Rewrite it to be more effective, clearer, and more consistent. Explain what you changed and why.
 
-
 ---
 
 # SOCMINT SaaS AI Prompts - Full Implementation Guide
@@ -459,41 +487,49 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 ---
 
 ## Prompt 1
+
 Create a full infrastructure layout for a multi-container SOCMINT SaaS platform using Docker Compose... [Content trimmed here for brevity]
 
 ---
 
 ## Prompt 2
+
 Create a complete FastAPI microservice named `data_collector` inside `backend/data_collector/`... [Content trimmed here for brevity]
 
 ---
 
 ## Prompt 3
+
 Create a FastAPI microservice named `ai_analytics_service` inside `backend/ai_analytics_service/`... [Content trimmed here for brevity]
 
 ---
 
 ## Prompt 4
+
 Create a FastAPI microservice named `financial_crime_service` inside `backend/financial_crime_service/`... [Content trimmed here for brevity]
 
 ---
 
 ## Prompt 5
+
 Create a FastAPI microservice named `cyber_forensics_service` inside `backend/cyber_forensics_service/`... [Content trimmed here for brevity]
 
 ---
 
 ## Prompt 6
+
 Create a complete Flutter Web application named `socmint_dashboard` for the SOCMINT platform... [Content trimmed here for brevity]
 
 ---
 
 ## Prompt 7
+
 Create a full deployment and testing checklist for the SOCMINT SaaS platform using Docker Compose... [Content trimmed here for brevity]
 
 ---
 
 ## Prompt 8
+
 Integrate `Postiz App` from GitHub into the SOCMINT platform as a standalone microservice called `social_media_manager`... [Content trimmed here for brevity]
 
 ---
@@ -505,7 +541,7 @@ Design a complete visual identity system for the SOCMINT platform under the bran
 
 Use the provided logo as the main reference. The identity must be simple, modern, UAE-inspired, and technically oriented.
 
-### Required Deliverables:
+### Required Deliverables
 
 1. **Color Palette**
    - Primary: Exact green from the logo.
@@ -546,9 +582,11 @@ Use the provided logo as the main reference. The identity must be simple, modern
    - Square version of logo.
    - 512x512, 192x192, 48x48 sizes.
 
-### Notes:
+### Notes
+
 - Provide colors and fonts as design tokens (.json or .scss).
 - Ready to apply in Flutter and TailwindCSS environments.
+
 ---
 
 ## Prompt 10: UAE PASS Integration for SOCMINT Authentication
@@ -604,6 +642,7 @@ Create a new service or module named `auth_uaepass` inside `backend/auth_service
 - Working end-to-end login using UAE PASS.
 - Internal SOCMINT role assignment per user.
 - Secure session with JWT and Flutter state binding.
+
 ---
 
 ## Prompt 1: SOCMINT Infrastructure with Docker Compose
@@ -686,6 +725,7 @@ socmint-platform/
 - Dockerfiles (for tor, backend, and optionally frontend)
 - Sample `.env` with secure values
 - `README.md` with build and run instructions
+
 ---
 
 ## Prompt 2: OSINT Data Collector Microservice (Social APIs + Web Scraping + TOR)
@@ -757,6 +797,7 @@ backend/
 - Modular collectors and scrapers
 - Kafka integration with retry logic
 - API with secure environment variables and status health check
+
 ---
 
 ## Prompt 3: AI Analytics Microservice (NLP + Classification)
@@ -832,6 +873,7 @@ backend/
 - NLP-processed results into Elasticsearch
 - Graph data written to Neo4j
 - Docker-ready service with clean FastAPI interface
+
 ---
 
 ## Prompt 4: Financial Crime Detection Microservice
@@ -896,6 +938,7 @@ backend/
 - Graph structure in Neo4j
 - Clear REST API to view alerts and clusters
 - Docker-ready service
+
 ---
 
 ## Prompt 5: Cyber Forensics & Blockchain Logging Microservice
@@ -964,6 +1007,7 @@ backend/
 - API access for human and machine
 - Blockchain-verified integrity
 - Docker-compatible with full traceability
+
 ---
 
 ## Prompt 6: Flutter Web Frontend with UAE PASS, Multilingual Support & UAE Identity Design
@@ -1040,6 +1084,7 @@ frontend_flutter/
 - Role-based views tied to SOCMINT backend
 - UAE PASS integration optional but ready
 - Docker-ready frontend with full branding
+
 ---
 
 ## Prompt 7: Full Deployment, Integration & Testing of SOCMINT Platform
@@ -1176,6 +1221,7 @@ Verify scraping via `/scrape/darkweb`.
 - End-to-end data flow validated
 - Frontend + backend + data layers + blockchain tested
 - Platform ready for production deployment
+
 ---
 
 ## Prompt 8: Social Media Manager Microservice (Postiz Integration)
@@ -1277,6 +1323,7 @@ backend/
 - Postiz-based code adapted for SOCMINT
 - Integrated into backend and visible in frontend
 - Analytics tracked per tenant
+
 ---
 
 ## Prompt 9: Visual Identity System for SOCMINT by RHAL
@@ -1349,6 +1396,7 @@ Establish a consistent, professional identity across all user interfaces, dashbo
 - UI kit (color tokens, font stacks, component examples)
 - Logo guidelines and assets
 - Style guide for documents and landing pages
+
 ---
 
 ## Prompt 10: UAE PASS Integration for SOCMINT Authentication
@@ -1431,6 +1479,7 @@ REDIRECT_URI=https://socmint.ae/auth/uaepass/callback
 - JWT mapped to SOCMINT roles and tenants
 - Secure and verifiable login
 - Fully integrated backend + Flutter support
+
 # OSINT Data Collector Microservice
 
 ## Overview
@@ -1536,21 +1585,26 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ## API Endpoints
 
 ### Root
+
 - `GET /` - Check if the API is running
 
 ### Status
+
 - `GET /status` - Get the health status of all collectors, scrapers, and connections
 
 ### Social Media Collection
+
 - `POST /collect/{platform}` - Trigger data collection from a specific social media platform
   - Supported platforms: facebook, twitter, reddit, instagram, whatsapp
   - Request body: JSON with query parameters specific to the platform
 
 ### Web Scraping
+
 - `POST /scrape` - Trigger web scraping job for regular websites
   - Request body: JSON with scraping parameters
 
 ### Dark Web Scraping
+
 - `POST /scrape/darkweb` - Trigger web scraping job for dark web sites via TOR
   - Request body: JSON with scraping parameters
 
@@ -1683,21 +1737,26 @@ WHATSAPP_API_KEY=your_api_key
 ## نقاط النهاية API
 
 ### الجذر
+
 - `GET /` - تحقق مما إذا كانت واجهة برمجة التطبيقات قيد التشغيل
 
 ### الحالة
+
 - `GET /status` - الحصول على حالة صحة جميع المجمعين والكاشطات والاتصالات
 
 ### جمع وسائل التواصل الاجتماعي
+
 - `POST /collect/{platform}` - تشغيل جمع البيانات من منصة وسائط اجتماعية محددة
   - المنصات المدعومة: facebook، twitter، reddit، instagram، whatsapp
   - نص الطلب: JSON مع معلمات الاستعلام الخاصة بالمنصة
 
 ### كشط الويب
+
 - `POST /scrape` - تشغيل مهمة كشط الويب للمواقع العادية
   - نص الطلب: JSON مع معلمات الكشط
 
 ### كشط الويب المظلم
+
 - `POST /scrape/darkweb` - تشغيل مهمة كشط الويب لمواقع الويب المظلم عبر TOR
   - نص الطلب: JSON مع معلمات الكشط
 
@@ -1714,7 +1773,6 @@ WHATSAPP_API_KEY=your_api_key
 - إعادة محاولات اتصال Kafka مع تراجع أسي
 - التحقق من اتصال TOR قبل كشط الويب المظلم
 - فحوصات حالة اتصال API
-
 
 # AI Analytics Microservice
 
@@ -1781,7 +1839,7 @@ TOPIC_MODEL=facebook/bart-large-mnli
 uvicorn main:app --reload
 ```
 
-The service will be available at http://localhost:8000
+The service will be available at <http://localhost:8000>
 
 ### API Endpoints
 
@@ -1909,7 +1967,7 @@ TOPIC_MODEL=facebook/bart-large-mnli
 uvicorn main:app --reload
 ```
 
-ستكون الخدمة متاحة على http://localhost:8000
+ستكون الخدمة متاحة على <http://localhost:8000>
 
 ### نقاط النهاية API
 
@@ -1970,7 +2028,6 @@ docker run -p 8000:8000 ai_analytics_service
                    └─────────────────────┘
 ```
 
-
 # SOCMINT Platform Deployment & Testing Guide
 
 ## Overview
@@ -1992,12 +2049,14 @@ This guide provides step-by-step instructions for deploying and validating the S
 ## Pre-Deployment Checklist
 
 1. Ensure Docker and Docker Compose are installed:
+
    ```bash
    docker --version
    docker-compose --version
    ```
 
 2. Verify system resources meet the minimum requirements:
+
    ```bash
    # Check CPU cores
    nproc
@@ -2157,12 +2216,14 @@ For additional support or to report issues, please contact the SOCMINT platform 
 ## قائمة التحقق قبل النشر
 
 1. تأكد من تثبيت Docker و Docker Compose:
+
    ```bash
    docker --version
    docker-compose --version
    ```
 
 2. تحقق من أن موارد النظام تلبي الحد الأدنى من المتطلبات:
+
    ```bash
    # التحقق من نوى وحدة المعالجة المركزية
    nproc
@@ -2299,14 +2360,14 @@ chmod +x deploy_and_test.sh
 
 للحصول على دعم إضافي أو للإبلاغ عن المشكلات، يرجى الاتصال بفريق منصة SOCMINT.
 
-
-
 # Social Media Manager Microservice
 
 ## Overview
+
 This microservice integrates the open-source Postiz App as a multi-tenant social media management solution within the SOCMINT platform. It enables each tenant to securely manage their social media accounts (Facebook, Twitter, LinkedIn) for scheduling, publishing, and analytics — isolated per customer.
 
 ## Features
+
 - **Multi-Tenant Authentication**: JWT validation with tenant isolation
 - **Social Media Integration**: OAuth2 for multiple platforms
 - **Post Scheduling**: Create and schedule posts with status monitoring
@@ -2316,6 +2377,7 @@ This microservice integrates the open-source Postiz App as a multi-tenant social
 ## Architecture
 
 ### Directory Structure
+
 ```
 social_media_manager/
 ├── Dockerfile
@@ -2338,12 +2400,14 @@ social_media_manager/
 ```
 
 ### API Endpoints
+
 - `POST /api/v1/connect/account` - Connect social media account
 - `POST /api/v1/schedule` - Schedule a post
 - `GET /api/v1/posts` - Get all posts for a tenant
 - `GET /api/v1/analytics/campaign/{id}` - Get campaign analytics
 
 ### Database Schema
+
 - `social_accounts` - Store social media account credentials
 - `posts` - Store post content and scheduling information
 - `campaigns` - Store campaign data and metrics
@@ -2351,11 +2415,13 @@ social_media_manager/
 ## Setup and Deployment
 
 ### Prerequisites
+
 - Python 3.10+
 - PostgreSQL database
 - Redis (for Celery)
 
 ### Installation
+
 1. Clone the repository
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set environment variables (see `.env.example`)
@@ -2363,11 +2429,13 @@ social_media_manager/
 5. Start the server: `uvicorn main:app --reload`
 
 ### Docker Deployment
+
 ```bash
 docker-compose up -d
 ```
 
 ## Security Considerations
+
 - All API endpoints require valid JWT authentication
 - Tenant isolation enforced via `tenant_id`
 - Social media tokens encrypted at rest
@@ -2378,9 +2446,11 @@ docker-compose up -d
 # خدمة إدارة وسائل التواصل الاجتماعي المصغرة
 
 ## نظرة عامة
+
 تدمج هذه الخدمة المصغرة تطبيق Postiz مفتوح المصدر كحل متعدد المستأجرين لإدارة وسائل التواصل الاجتماعي ضمن منصة SOCMINT. تمكن كل مستأجر من إدارة حسابات وسائل التواصل الاجتماعي الخاصة به (فيسبوك، تويتر، لينكد إن) بشكل آمن للجدولة والنشر والتحليلات — معزولة لكل عميل.
 
 ## الميزات
+
 - **مصادقة متعددة المستأجرين**: التحقق من JWT مع عزل المستأجر
 - **تكامل وسائل التواصل الاجتماعي**: OAuth2 لمنصات متعددة
 - **جدولة المنشورات**: إنشاء وجدولة المنشورات مع مراقبة الحالة
@@ -2390,6 +2460,7 @@ docker-compose up -d
 ## الهيكل
 
 ### هيكل الدليل
+
 ```
 social_media_manager/
 ├── Dockerfile
@@ -2412,12 +2483,14 @@ social_media_manager/
 ```
 
 ### نقاط النهاية API
+
 - `POST /api/v1/connect/account` - ربط حساب وسائل التواصل الاجتماعي
 - `POST /api/v1/schedule` - جدولة منشور
 - `GET /api/v1/posts` - الحصول على جميع المنشورات لمستأجر
 - `GET /api/v1/analytics/campaign/{id}` - الحصول على تحليلات الحملة
 
 ### مخطط قاعدة البيانات
+
 - `social_accounts` - تخزين بيانات اعتماد حساب وسائل التواصل الاجتماعي
 - `posts` - تخزين محتوى المنشور ومعلومات الجدولة
 - `campaigns` - تخزين بيانات الحملة والمقاييس
@@ -2425,11 +2498,13 @@ social_media_manager/
 ## الإعداد والنشر
 
 ### المتطلبات المسبقة
+
 - Python 3.10+
 - قاعدة بيانات PostgreSQL
 - Redis (لـ Celery)
 
 ### التثبيت
+
 1. استنساخ المستودع
 2. تثبيت التبعيات: `pip install -r requirements.txt`
 3. تعيين متغيرات البيئة (انظر `.env.example`)
@@ -2437,16 +2512,17 @@ social_media_manager/
 5. بدء الخادم: `uvicorn main:app --reload`
 
 ### نشر Docker
+
 ```bash
 docker-compose up -d
 ```
 
 ## اعتبارات الأمان
+
 - تتطلب جميع نقاط نهاية API مصادقة JWT صالحة
 - فرض عزل المستأجر عبر `tenant_id`
 - تشفير رموز وسائل التواصل الاجتماعي في وضع الراحة
 - HTTPS مطلوب لجميع الاتصالات
-
 
 # SOCMINT Visual Identity System
 
@@ -2592,6 +2668,7 @@ class SOCMINTTextStyles {
 ### Buttons
 
 #### Primary Button
+
 - Background: RHAL Green (#00A651)
 - Text: White
 - Border Radius: 8px
@@ -2601,6 +2678,7 @@ class SOCMINTTextStyles {
 - Disabled State: Medium Gray background
 
 #### Secondary Button
+
 - Background: Transparent
 - Text: RHAL Green
 - Border: 1px RHAL Green
@@ -2611,6 +2689,7 @@ class SOCMINTTextStyles {
 - Disabled State: Medium Gray text and border
 
 #### Tertiary Button (Text Button)
+
 - Background: Transparent
 - Text: RHAL Green
 - Border: None
@@ -2631,6 +2710,7 @@ class SOCMINTTextStyles {
 ### Form Elements
 
 #### Text Input
+
 - Background: White
 - Border: 1px Medium Gray
 - Border Radius: 8px
@@ -2640,11 +2720,13 @@ class SOCMINTTextStyles {
 - Error State: UAE Red border
 
 #### Dropdown
+
 - Same styling as Text Input
 - Dropdown Icon: Dark Gray
 - Options Menu: White background, 4px border radius
 
 #### Checkbox
+
 - Size: 20px × 20px
 - Border: 1px Medium Gray
 - Border Radius: 4px
@@ -2653,6 +2735,7 @@ class SOCMINTTextStyles {
 ### Navigation
 
 #### Sidebar
+
 - Background: RHAL Dark (#1A1A1A)
 - Text: White
 - Active Item: RHAL Green left border, light green background
@@ -2660,6 +2743,7 @@ class SOCMINTTextStyles {
 - Icon: 24px, aligned with text
 
 #### Top Bar
+
 - Background: White
 - Border Bottom: 1px Light Gray
 - Height: 64px
@@ -2671,19 +2755,23 @@ class SOCMINTTextStyles {
 ## 4. Logo Usage
 
 ### Primary Logo
+
 - The RHAL logo consists of the Arabic text "رحّال" with a green bar above it
 - Primary version is white text on black background
 - The green bar must always be preserved in the RHAL Green color (#00A651)
 
 ### Clear Space
+
 - Maintain clear space around the logo equal to the height of the letter "ر" in the logo
 - No elements should intrude into this clear space
 
 ### Size Restrictions
+
 - Minimum size: 24px height for digital use
 - Minimum size: 10mm height for print use
 
 ### Incorrect Usage
+
 - Do not distort or stretch the logo
 - Do not change the colors of the logo elements
 - Do not rotate or flip the logo
@@ -2691,6 +2779,7 @@ class SOCMINTTextStyles {
 - Do not add effects (shadows, glows, etc.) to the logo
 
 ### Logo Variants
+
 1. Primary: White on black
 2. Reversed: Black on white
 3. Monochrome: All white (for dark backgrounds)
@@ -2703,11 +2792,13 @@ class SOCMINTTextStyles {
 ### Dashboard Layout
 
 #### Structure
+
 - Left Sidebar: 240px width, RHAL Dark background
 - Top Bar: 64px height, white background
 - Main Content Area: Remaining space, Light Gray background
 
 #### Grid System
+
 - 12-column grid
 - 24px gutters
 - Responsive breakpoints:
@@ -2716,6 +2807,7 @@ class SOCMINTTextStyles {
   - Desktop: > 1024px
 
 #### Card Layout
+
 - Cards should align to the grid
 - Standard card sizes:
   - 1/4 width (3 columns)
@@ -2724,6 +2816,7 @@ class SOCMINTTextStyles {
   - Full width (12 columns)
 
 #### Spacing System
+
 - Base unit: 8px
 - Spacing scale: 8px, 16px, 24px, 32px, 48px, 64px
 - Consistent spacing between sections: 32px
@@ -2772,12 +2865,14 @@ class SOCMINTTextStyles {
 ### Report Template
 
 #### Cover Page
+
 - RHAL logo (top center)
 - Report title (H1, centered)
 - Date and classification (Body 2, centered)
 - Generated by SOCMINT (caption, bottom center)
 
 #### Interior Pages
+
 - Header: RHAL logo (small, top left), page number (top right)
 - Section headings: H2
 - Subsection headings: H3
@@ -2789,12 +2884,14 @@ class SOCMINTTextStyles {
 ### Presentation Template
 
 #### Title Slide
+
 - RHAL logo (center)
 - Presentation title (H1)
 - Subtitle or date (H3)
 - Presenter information (Body 1)
 
 #### Content Slides
+
 - Header: RHAL logo (small, top left), slide title (top)
 - Content area: Clean, minimal
 - Text hierarchy: H2 for titles, Body 1 for content
@@ -2805,17 +2902,20 @@ class SOCMINTTextStyles {
 ## 8. Icons and Favicon
 
 ### Icon Style
+
 - Line weight: 2px
 - Corner radius: 2px
 - Style: Outlined with occasional solid elements
 - Size: 24px × 24px (standard), 16px × 16px (small)
 
 ### Favicon
+
 - Square version of the RHAL logo
 - Sizes: 512×512, 192×192, 48×48, 32×32, 16×16
 - Format: SVG (primary), PNG (fallback)
 
 ### App Icon
+
 - Square with rounded corners (12px radius)
 - RHAL logo centered
 - RHAL Green background
@@ -2949,6 +3049,7 @@ _رحّال – عجمان للتقنيات المتقدمة_
 ### الأزرار
 
 #### الزر الأساسي
+
 - الخلفية: أخضر رحّال (#00A651)
 - النص: أبيض
 - نصف قطر الحدود: 8 بكسل
@@ -2958,6 +3059,7 @@ _رحّال – عجمان للتقنيات المتقدمة_
 - حالة التعطيل: خلفية رمادية متوسطة
 
 #### الزر الثانوي
+
 - الخلفية: شفافة
 - النص: أخضر رحّال
 - الحدود: 1 بكسل أخضر رحّال
@@ -2972,11 +3074,13 @@ _رحّال – عجمان للتقنيات المتقدمة_
 ## ٤. استخدام الشعار
 
 ### الشعار الأساسي
+
 - يتكون شعار رحّال من النص العربي "رحّال" مع شريط أخضر فوقه
 - النسخة الأساسية هي نص أبيض على خلفية سوداء
 - يجب الحفاظ دائمًا على الشريط الأخضر بلون أخضر رحّال (#00A651)
 
 ### المساحة الخالية
+
 - الحفاظ على مساحة خالية حول الشعار تساوي ارتفاع حرف "ر" في الشعار
 - لا ينبغي أن تتعدى أي عناصر على هذه المساحة الخالية
 
@@ -2987,6 +3091,7 @@ _رحّال – عجمان للتقنيات المتقدمة_
 ### تخطيط لوحة المعلومات
 
 #### الهيكل
+
 - الشريط الجانبي الأيسر: عرض 240 بكسل، خلفية داكنة رحّال
 - الشريط العلوي: ارتفاع 64 بكسل، خلفية بيضاء
 - منطقة المحتوى الرئيسية: المساحة المتبقية، خلفية رمادية فاتحة
@@ -3132,5 +3237,6 @@ _رحّال – عجمان للتقنيات المتقدمة_
 ## الطباعة
 
 - **العربية**: خط دبي / نوتو كوفي العربي
-- **الإنجليزية**: مونتسيرات / سورس سانس برو#   S O C M I N T  
+- **الإنجليزية**: مونتسيرات / سورس سانس برو#   S O C M I N T 
+ 
  

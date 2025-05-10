@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../localization/intl_localizations.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  const NavigationDrawerWidget({Key? key}) : super(key: key);
+  const NavigationDrawerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

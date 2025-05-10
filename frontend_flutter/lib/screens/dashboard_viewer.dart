@@ -3,7 +3,7 @@ import '../widgets/navigation_drawer.dart';
 import '../localization/intl_localizations.dart';
 
 class DashboardViewerScreen extends StatelessWidget {
-  const DashboardViewerScreen({Key? key}) : super(key: key);
+  const DashboardViewerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 
 class UAEPassCallbackScreen extends StatefulWidget {
-  const UAEPassCallbackScreen({Key? key}) : super(key: key);
+  const UAEPassCallbackScreen({super.key});
 
   @override
   State<UAEPassCallbackScreen> createState() => _UAEPassCallbackScreenState();

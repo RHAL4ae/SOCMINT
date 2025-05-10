@@ -15,13 +15,13 @@ class SOCMINTPrimaryButton extends StatelessWidget {
   final IconData? icon;
 
   const SOCMINTPrimaryButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.isLoading = false,
     this.isFullWidth = false,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -76,13 +76,13 @@ class SOCMINTSecondaryButton extends StatelessWidget {
   final IconData? icon;
 
   const SOCMINTSecondaryButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.isLoading = false,
     this.isFullWidth = false,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -134,11 +134,11 @@ class SOCMINTTextButton extends StatelessWidget {
   final IconData? icon;
 
   const SOCMINTTextButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -176,13 +176,13 @@ class SOCMINTCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const SOCMINTCard({
-    Key? key,
+    super.key,
     required this.child,
     this.padding,
     this.width,
     this.height,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +227,7 @@ class SOCMINTTextField extends StatelessWidget {
   final int? minLines;
 
   const SOCMINTTextField({
-    Key? key,
+    super.key,
     this.label,
     this.hint,
     this.controller,
@@ -241,7 +241,7 @@ class SOCMINTTextField extends StatelessWidget {
     this.enabled = true,
     this.maxLines = 1,
     this.minLines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -282,12 +282,12 @@ class SOCMINTAlert extends StatelessWidget {
   final VoidCallback? onClose;
 
   const SOCMINTAlert({
-    Key? key,
+    super.key,
     required this.message,
     this.title,
     this.type = AlertType.info,
     this.onClose,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -393,10 +393,10 @@ class SOCMINTSectionHeader extends StatelessWidget {
   final Widget? action;
   
   const SOCMINTSectionHeader({
-    Key? key,
+    super.key,
     required this.title,
     this.action,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -413,7 +413,7 @@ class SOCMINTSectionHeader extends StatelessWidget {
           Text(
             title,
             style: textStyle.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           if (action != null) action!,
@@ -431,12 +431,12 @@ class SOCMINTAvatar extends StatelessWidget {
   final Color? backgroundColor;
   
   const SOCMINTAvatar({
-    Key? key,
+    super.key,
     this.imageUrl,
     this.initials,
     this.size = 40,
     this.backgroundColor,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -476,11 +476,11 @@ class SOCMINTBadge extends StatelessWidget {
   final double fontSize;
   
   const SOCMINTBadge({
-    Key? key,
+    super.key,
     required this.text,
     this.color,
     this.fontSize = 12,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -513,12 +513,12 @@ class SOCMINTDivider extends StatelessWidget {
   final double endIndent;
   
   const SOCMINTDivider({
-    Key? key,
+    super.key,
     this.height = 1,
     this.thickness = 1,
     this.indent = 0,
     this.endIndent = 0,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -540,12 +540,12 @@ class SOCMINTEmptyState extends StatelessWidget {
   final Widget? action;
   
   const SOCMINTEmptyState({
-    Key? key,
+    super.key,
     required this.message,
     this.title,
     this.icon = Icons.inbox,
     this.action,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -560,14 +560,14 @@ class SOCMINTEmptyState extends StatelessWidget {
             Icon(
               icon,
               size: 64,
-              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.3),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
             ),
             const SizedBox(height: 16),
             if (title != null) ...[  
               Text(
                 title!,
                 style: (isRTL ? SOCMINTTextStyles.arabicH3 : SOCMINTTextStyles.englishH3).copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -576,7 +576,7 @@ class SOCMINTEmptyState extends StatelessWidget {
             Text(
               message,
               style: (isRTL ? SOCMINTTextStyles.arabicBody1 : SOCMINTTextStyles.englishBody1).copyWith(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
               ),
               textAlign: TextAlign.center,
             ),

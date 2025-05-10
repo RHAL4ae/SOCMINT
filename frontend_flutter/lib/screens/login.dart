@@ -3,7 +3,7 @@ import '../services/auth_service.dart';
 import '../localization/intl_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _loading = false;
       if (!success) {
-        _error = SocmintLocalizations.of(context)?.translate('login') + ' failed';
+        _error = '${SocmintLocalizations.of(context)?.translate('login')} failed';
       }
     });
     if (success) {

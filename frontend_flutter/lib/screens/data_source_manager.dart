@@ -3,7 +3,7 @@ import '../widgets/navigation_drawer.dart';
 import '../localization/intl_localizations.dart';
 
 class DataSourceManagerScreen extends StatelessWidget {
-  const DataSourceManagerScreen({Key? key}) : super(key: key);
+  const DataSourceManagerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

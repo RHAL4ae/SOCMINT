@@ -1,4 +1,7 @@
 {
     "workbench.experimental.cloudChanges.autoStore": "onShutdown",
-    "workbench.experimental.cloudChanges.partialMatches.enabled": true
+    "workbench.experimental.cloudChanges.partialMatches.enabled": true,
+    "cSpell.words": [
+        "SOCMINT"
+    ]
 }

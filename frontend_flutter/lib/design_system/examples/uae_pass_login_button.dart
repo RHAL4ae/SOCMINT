@@ -12,10 +12,10 @@ class UAEPassLoginButton extends StatelessWidget {
   final bool isLoading;
   
   const UAEPassLoginButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     this.isLoading = false,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,10 @@ class UAEPassLoginCard extends StatelessWidget {
   final bool isLoading;
   
   const UAEPassLoginCard({
-    Key? key,
+    super.key,
     required this.onLoginPressed,
     this.isLoading = false,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {
