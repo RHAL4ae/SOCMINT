@@ -53,6 +53,7 @@ class SidebarExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
+
     
     return Container(
       width: 240,
@@ -125,7 +126,7 @@ class SidebarExample extends StatelessWidget {
   }
   
   Widget _buildMenuItem(BuildContext context, int index, IconData icon, String label, bool isSelected) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
@@ -180,6 +181,7 @@ class TopBarExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
+
     
     return Container(
       height: 64,
@@ -285,6 +287,7 @@ class DashboardContentExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isRTL = Directionality.of(context) == TextDirection.rtl;
+
     
     return SingleChildScrollView(
       child: Column(
@@ -501,11 +504,10 @@ class DashboardContentExample extends StatelessWidget {
   }
   
   Widget _buildStatCard(BuildContext context, String title, String value, IconData icon, Color color) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
-    
+  final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     return SOCMINTCard(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -550,8 +552,7 @@ class DashboardContentExample extends StatelessWidget {
   }
   
   Widget _buildActivityItem(BuildContext context, String title, String description, String time, IconData icon, Color color) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
-    
+  final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
@@ -573,7 +574,7 @@ class DashboardContentExample extends StatelessWidget {
           const SizedBox(width: 16),
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: isRTL ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
@@ -604,8 +605,7 @@ class DashboardContentExample extends StatelessWidget {
   }
   
   Widget _buildEntityItem(BuildContext context, String name, String type, String info) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
-    
+  final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
