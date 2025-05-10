@@ -12,7 +12,6 @@ class DashboardLayoutExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     
     return Scaffold(
       body: Row(
@@ -52,10 +51,6 @@ class SidebarExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
-    final TextStyle menuStyle = isRTL 
-        ? SOCMINTTextStyles.arabicBody1 
-        : SOCMINTTextStyles.englishBody1;
     
     return Container(
       width: 240,
@@ -131,7 +126,7 @@ class SidebarExample extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: isSelected ? SOCMINTColors.rhalGreen.withOpacity(0.2) : Colors.transparent,
+        color: isSelected ? SOCMINTColors.rhalGreen.withAlpha((0.2 * 255).toInt()) : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         border: isSelected 
             ? Border(
@@ -181,7 +176,6 @@ class TopBarExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     
     return Container(
       height: 64,
@@ -190,7 +184,7 @@ class TopBarExample extends StatelessWidget {
         color: Theme.of(context).appBarTheme.backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withAlpha((0.05 * 255).toInt()),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -215,7 +209,7 @@ class TopBarExample extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.light 
                   ? SOCMINTColors.lightGray 
-                  : SOCMINTColors.rhalDark.withOpacity(0.3),
+                  : SOCMINTColors.rhalDark.withAlpha((0.3 * 255).toInt()),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -224,13 +218,13 @@ class TopBarExample extends StatelessWidget {
                 Icon(
                   Icons.search,
                   size: 20,
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                  color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
                 ),
                 const SizedBox(width: 8),
                 Text(
                   isRTL ? 'بحث...' : 'Search...',
                   style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
                   ),
                 ),
               ],
@@ -286,7 +280,6 @@ class DashboardContentExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     
     return SingleChildScrollView(
       child: Column(
@@ -503,7 +496,6 @@ class DashboardContentExample extends StatelessWidget {
   }
   
   Widget _buildStatCard(BuildContext context, String title, String value, IconData icon, Color color) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     
     return SOCMINTCard(
       child: Column(
@@ -515,7 +507,7 @@ class DashboardContentExample extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withAlpha((0.1 * 255).toInt()),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
@@ -527,7 +519,7 @@ class DashboardContentExample extends StatelessWidget {
               const Spacer(),
               Icon(
                 Icons.more_vert,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
                 size: 20,
               ),
             ],
@@ -543,7 +535,7 @@ class DashboardContentExample extends StatelessWidget {
           Text(
             title,
             style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSurface.withAlpha((0.7 * 255).toInt()),
             ),
           ),
         ],
@@ -552,7 +544,6 @@ class DashboardContentExample extends StatelessWidget {
   }
   
   Widget _buildActivityItem(BuildContext context, String title, String description, String time, IconData icon, Color color) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -563,7 +554,7 @@ class DashboardContentExample extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withAlpha((0.1 * 255).toInt()),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
@@ -587,7 +578,7 @@ class DashboardContentExample extends StatelessWidget {
                 Text(
                   description,
                   style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                    color: Theme.of(context).colorScheme.onSurface.withAlpha((0.7 * 255).toInt()),
                   ),
                 ),
               ],
@@ -597,7 +588,7 @@ class DashboardContentExample extends StatelessWidget {
           Text(
             time,
             style: (isRTL ? SOCMINTTextStyles.arabicCaption : SOCMINTTextStyles.englishCaption).copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+              color: Theme.of(context).colorScheme.onSurface.withAlpha((0.5 * 255).toInt()),
             ),
           ),
         ],
@@ -606,7 +597,6 @@ class DashboardContentExample extends StatelessWidget {
   }
   
   Widget _buildEntityItem(BuildContext context, String name, String type, String info) {
-    final bool isRTL = Directionality.of(context) == TextDirection.rtl;
     
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -631,7 +621,7 @@ class DashboardContentExample extends StatelessWidget {
                 Text(
                   info,
                   style: (isRTL ? SOCMINTTextStyles.arabicBody2 : SOCMINTTextStyles.englishBody2).copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                    color: Theme.of(context).colorScheme.onSurface.withAlpha((0.7 * 255).toInt()),
                   ),
                 ),
               ],

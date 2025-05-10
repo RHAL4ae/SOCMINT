@@ -141,7 +141,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend_flutter
       dockerfile: Dockerfile
     container_name: frontend
     ports:
@@ -159,6 +159,8 @@ services:
     container_name: tor
     ports:
       - "9050:9050"
+    volumes:
+      - ./tor/torrc:/etc/tor/torrc
     networks:
       socmint_network:
         aliases:

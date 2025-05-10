@@ -2,6 +2,9 @@
     "workbench.experimental.cloudChanges.autoStore": "onShutdown",
     "workbench.experimental.cloudChanges.partialMatches.enabled": true,
     "cSpell.words": [
+        "Ajman",
+        "cupertino",
+        "darkweb",
         "SOCMINT"
     ]
 }

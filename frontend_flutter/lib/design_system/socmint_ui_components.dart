@@ -197,7 +197,7 @@ class SOCMINTCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -301,26 +301,25 @@ class SOCMINTAlert extends StatelessWidget {
     
     switch (type) {
       case AlertType.success:
-        backgroundColor = SOCMINTColors.success.withOpacity(0.1);
+        backgroundColor = SOCMINTColors.success.withValues(alpha: 0.1);
         borderColor = SOCMINTColors.success;
         iconColor = SOCMINTColors.success;
         icon = Icons.check_circle;
         break;
       case AlertType.warning:
-        backgroundColor = SOCMINTColors.warning.withOpacity(0.1);
+        backgroundColor = SOCMINTColors.warning.withValues(alpha: 0.1);
         borderColor = SOCMINTColors.warning;
         iconColor = SOCMINTColors.warning;
         icon = Icons.warning;
         break;
       case AlertType.error:
-        backgroundColor = SOCMINTColors.uaeRed.withOpacity(0.1);
+        backgroundColor = SOCMINTColors.uaeRed.withValues(alpha: 0.1);
         borderColor = SOCMINTColors.uaeRed;
         iconColor = SOCMINTColors.uaeRed;
         icon = Icons.error;
         break;
       case AlertType.info:
-      default:
-        backgroundColor = SOCMINTColors.info.withOpacity(0.1);
+        backgroundColor = SOCMINTColors.info.withValues(alpha: 0.1);
         borderColor = SOCMINTColors.info;
         iconColor = SOCMINTColors.info;
         icon = Icons.info;
@@ -370,7 +369,7 @@ class SOCMINTAlert extends StatelessWidget {
               onPressed: onClose,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
             ),
           ],
         ],
@@ -490,7 +489,7 @@ class SOCMINTBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: badgeColor.withOpacity(0.1),
+        color: badgeColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: badgeColor),
       ),
@@ -560,7 +559,7 @@ class SOCMINTEmptyState extends StatelessWidget {
             Icon(
               icon,
               size: 64,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
             ),
             const SizedBox(height: 16),
             if (title != null) ...[  
@@ -576,7 +575,7 @@ class SOCMINTEmptyState extends StatelessWidget {
             Text(
               message,
               style: (isRTL ? SOCMINTTextStyles.arabicBody1 : SOCMINTTextStyles.englishBody1).copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
               ),
               textAlign: TextAlign.center,
             ),

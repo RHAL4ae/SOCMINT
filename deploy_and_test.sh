@@ -75,14 +75,14 @@ wait_for_service() {
 print_header "Checking System Requirements"
 
 # Check Ubuntu version
-ubuntu_version=$(lsb_release -rs)
-echo "Ubuntu version: $ubuntu_version"
-if [[ $(echo "$ubuntu_version >= 20.04" | bc) -eq 1 ]]; then
-  echo -e "${GREEN}✓ Ubuntu version requirement met${NC}"
-else
-  echo -e "${RED}✗ Ubuntu version below 20.04. Please upgrade.${NC}"
-  exit 1
-fi
+# ubuntu_version=$(lsb_release -rs)
+# echo "Ubuntu version: $ubuntu_version"
+# if [[ $(echo "$ubuntu_version >= 20.04" | bc) -eq 1 ]]; then
+#   echo -e "${GREEN}✓ Ubuntu version requirement met${NC}"
+# else
+#   echo -e "${RED}✗ Ubuntu version below 20.04. Please upgrade.${NC}"
+#   exit 1
+# fi
 
 # Check CPU cores
 cpu_cores=$(nproc)

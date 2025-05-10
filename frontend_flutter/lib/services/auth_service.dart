@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_service.dart';
+import 'dart:js' as js;
 
 class AuthService {
   static final FlutterSecureStorage _storage = const FlutterSecureStorage();
@@ -42,9 +43,8 @@ class AuthService {
       // For mobile, we would use url_launcher or in-app webview
       if (Uri.base.toString().contains('localhost') || Uri.base.toString().contains('socmint.ae')) {
         // Web implementation
-        final js = "window.location.href = '$uaePassLoginUrl'";
-        // Use dart:js to execute JavaScript
-        js.context.callMethod('eval', [js]);
+        final jsCode = "window.location.href = '$uaePassLoginUrl'";
+        js.context.callMethod('eval', [jsCode]);
         return true; // This won't actually return as page will redirect
       } else {
         // TODO: Implement mobile version with url_launcher or webview
