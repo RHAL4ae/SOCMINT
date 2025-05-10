@@ -354,11 +354,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
 
+enum SettingType {
+  darkMode,
+  language,
+  theme,
+}
+
 class _SettingItem extends StatelessWidget {
-  final String title;
+  final SettingType type;
 
   const _SettingItem({
-    required this.title,
+    required this.type,
   });
 
   @override
@@ -372,7 +378,7 @@ class _SettingItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  _getTitle(context),
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
@@ -381,5 +387,16 @@ class _SettingItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _getTitle(BuildContext context) {
+    switch (type) {
+      case SettingType.darkMode:
+        return AppLocalizations.of(context)!.darkMode;
+      case SettingType.language:
+        return AppLocalizations.of(context)!.language;
+      case SettingType.theme:
+        return AppLocalizations.of(context)!.theme;
+    }
   }
 }
