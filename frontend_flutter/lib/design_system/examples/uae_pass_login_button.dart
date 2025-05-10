@@ -111,7 +111,7 @@ class UAEPassLoginCard extends StatelessWidget {
           Text(
             description,
             style: bodyStyle.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),

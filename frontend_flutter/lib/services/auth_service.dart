@@ -1,7 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_service.dart';
-import 'dart:js' as js;
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:logger/logger.dart';
+// Only import dart:html for web
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
+import 'jwt_utils.dart';
 
 class AuthService {
   static final FlutterSecureStorage _storage = const FlutterSecureStorage();
@@ -41,17 +46,29 @@ class AuthService {
       // This will redirect to UAE PASS, then back to our callback URL
       // For Flutter Web, we can use window.location.href
       // For mobile, we would use url_launcher or in-app webview
-      if (Uri.base.toString().contains('localhost') || Uri.base.toString().contains('socmint.ae')) {
+      if (kIsWeb) {
         // Web implementation
-        final jsCode = "window.location.href = '$uaePassLoginUrl'";
-        js.context.callMethod('eval', [jsCode]);
+        html.window.location.href = uaePassLoginUrl;
         return true; // This won't actually return as page will redirect
       } else {
-        // TODO: Implement mobile version with url_launcher or webview
-        throw Exception('Mobile implementation not available yet');
+        // Mobile implementation using url_launcher
+        try {
+          // Uncomment the following lines if url_launcher is added to pubspec.yaml
+          // import 'package:url_launcher/url_launcher.dart';
+          // if (await canLaunch(uaePassLoginUrl)) {
+          //   await launch(uaePassLoginUrl, forceSafariVC: true, forceWebView: true);
+          //   return true;
+          // } else {
+          //   throw Exception('Could not launch UAE PASS login URL');
+          // }
+          throw Exception('Mobile implementation not available yet. Please add url_launcher package.');
+        } catch (e) {
+          Logger().e('UAE PASS mobile login error: $e');
+          return false;
+        }
       }
     } catch (e) {
-      print('UAE PASS login error: $e');
+      Logger().e('UAE PASS login error: $e');
       return false;
     }
   }
@@ -69,13 +86,26 @@ class AuthService {
       }
       return false;
     } catch (e) {
-      print('UAE PASS callback processing error: $e');
+      Logger().e('UAE PASS callback processing error: $e');
       return false;
     }
   }
 
   static Future<String?> getRole() async {
-    // TODO: Implement role extraction from JWT or backend
+    final token = await ApiService.getToken();
+    if (token == null) return null;
+    final payload = JwtUtils.decodeJwtPayload(token);
+    if (payload == null) return null;
+    // The claim name could be 'role', 'roles', or similar depending on your backend
+    if (payload.containsKey('role')) {
+      return payload['role'] as String?;
+    } else if (payload.containsKey('roles')) {
+      // If roles is a list, pick the first one
+      final roles = payload['roles'];
+      if (roles is List && roles.isNotEmpty) {
+        return roles.first as String?;
+      }
+    }
     return null;
   }
 }

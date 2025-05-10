@@ -29,8 +29,19 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
     if (success) {
-      // TODO: Route based on role
-      Navigator.pushReplacementNamed(context, '/dashboard/admin');
+      // Route based on role
+      final role = await AuthService.getRole();
+      if (!mounted) return;
+      if (role == 'admin') {
+        Navigator.pushReplacementNamed(context, '/dashboard/admin');
+      } else if (role == 'analyst') {
+        Navigator.pushReplacementNamed(context, '/dashboard/analyst');
+      } else if (role == 'viewer') {
+        Navigator.pushReplacementNamed(context, '/dashboard/viewer');
+      } else {
+        // Default fallback
+        Navigator.pushReplacementNamed(context, '/dashboard/admin');
+      }
     }
   }
 
