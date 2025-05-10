@@ -2,12 +2,12 @@
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
-from models.sentiment_analysis import analyze_sentiment
-from models.ner import extract_entities
-from models.topic_classification import classify_topic
-from utils.kafka_consumer import KafkaTextConsumer
-from utils.elasticsearch_client import ElasticsearchClient
-from utils.neo4j_client import Neo4jClient
+from ai_analytics_service.models.sentiment_analysis import analyze_sentiment
+from ai_analytics_service.models.ner import extract_entities
+from ai_analytics_service.models.topic_classification import classify_topic
+from ai_analytics_service.utils.kafka_consumer import KafkaTextConsumer
+from ai_analytics_service.utils.elasticsearch_client import ElasticsearchClient
+from ai_analytics_service.utils.neo4j_client import Neo4jClient
 import datetime
 import asyncio
 import threading
@@ -66,7 +66,7 @@ processing_status = {
 
 # Elasticsearch and Neo4j clients
 es_client = ElasticsearchClient(
-    hosts=os.getenv("ELASTICSEARCH_HOSTS", "localhost:9200").split(","),
+    hosts=os.getenv("ELASTICSEARCH_HOSTS", "http://elasticsearch:9200").split(","),
     username=os.getenv("ELASTICSEARCH_USERNAME"),
     password=os.getenv("ELASTICSEARCH_PASSWORD")
 )

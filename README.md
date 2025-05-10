@@ -1,21 +1,21 @@
-# SOCMINT Developer README 🧠💻
+# SOCMINT Developer README 
 
-# دليل مطور SOCMINT 🧠💻
+# دليل مطور SOCMINT 
 
 This technical README provides a comprehensive overview of the SOCMINT platform from a development and deployment perspective. It includes setup instructions, architectural layout, services, APIs, and integration flows.
 هذا الملف التقني يقدم نظرة شاملة على منصة SOCMINT من منظور التطوير والنشر. يتضمن تعليمات الإعداد، التخطيط المعماري، الخدمات، واجهات البرمجة، وتدفقات التكامل.
 
 ---
 
-## 🧱 System Architecture
+## System Architecture
 
-## 🧱 البنية المعمارية للنظام
+## البنية المعمارية للنظام
 
 SOCMINT is a multi-service SaaS platform composed of:
 تتكون منصة SOCMINT كخدمة SaaS متعددة الخدمات من:
 
-* **Frontend**: Vue.js, Tailwind CSS, i18n, UAE PASS OAuth
-* **الواجهة الأمامية**: Vue.js، Tailwind CSS، i18n، UAE PASS OAuth
+* **Frontend**: Flutter (Dart), i18n, UAE PASS OAuth
+* **الواجهة الأمامية**: Flutter (Dart)، i18n، UAE PASS OAuth
 * **Backend**: FastAPI microservices
 * **الخلفية**: خدمات FastAPI المصغرة
 * **Data Layer**: PostgreSQL, Elasticsearch, Neo4j
@@ -27,13 +27,13 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
-## 🔧 التقنيات المستخدمة
+## التقنيات المستخدمة
 
 | Component      | Stack                                             |
 | -------------- | ------------------------------------------------- |
-| Frontend       | Vue 3, Pinia, Vue Router, Tailwind CSS            |
+| Frontend       | Flutter (Dart), i18n, UAE PASS OAuth              |
 | Backend        | FastAPI, LangChain, Pydantic, Redis               |
 | AI Services    | HuggingFace Transformers, DeepSeek R1, Google NLP |
 | Databases      | PostgreSQL, Elasticsearch, Neo4j                  |
@@ -44,7 +44,7 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 | المكون                 | التقنية                                           |
 | ---------------------- | ------------------------------------------------- |
-| الواجهة الأمامية       | Vue 3، Pinia، Vue Router، Tailwind CSS            |
+| الواجهة الأمامية       | Flutter (Dart)، i18n، UAE PASS OAuth            |
 | الخلفية                | FastAPI، LangChain، Pydantic، Redis               |
 | خدمات الذكاء الاصطناعي | HuggingFace Transformers، DeepSeek R1، Google NLP |
 | قواعد البيانات         | PostgreSQL، Elasticsearch، Neo4j                  |
@@ -55,9 +55,9 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ---
 
-## 🚀 Deployment Instructions
+## Deployment Instructions
 
-## 🚀 تعليمات النشر
+## تعليمات النشر
 
 1. **Clone the repository**
 
@@ -111,11 +111,22 @@ SOCMINT is a multi-service SaaS platform composed of:
    * Elasticsearch: `http://localhost:9200`
    * Neo4j: `http://localhost:7474`
 
+### Frontend Setup (Flutter)
+
+1. `cd frontend_flutter`
+2. `cp .env.example .env` (if needed)
+3. `flutter pub get`
+4. `flutter run` (for mobile or desktop)
+5. `flutter run -d chrome` (for web development)
+6. `flutter build web` (for production web build)
+   - Output will be in `frontend_flutter/build/web`
+7. Deploy the contents of `build/web` to your web server (e.g., Nginx, Netlify, Vercel, or Docker)
+
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
-## 📡 نقاط النهاية (API)
+## نقاط النهاية (API)
 
 | Endpoint              | Method | Description                  |
 | --------------------- | ------ | ---------------------------- |
@@ -139,9 +150,9 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ---
 
-## 🧪 Testing & Validation
+## Testing & Validation
 
-## 🧪 الاختبار والتحقق
+## الاختبار والتحقق
 
 * Use Postman or `curl` to exercise APIs.
 
@@ -169,9 +180,9 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ---
 
-## 📊 KPIs & Analytics
+## KPIs & Analytics
 
-## 📊 مؤشرات الأداء والتحليلات
+## مؤشرات الأداء والتحليلات
 
 * Integrated with GEM 2.1 indicators.
 
@@ -187,9 +198,9 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ---
 
-## 🌐 Integrated Platforms
+## Integrated Platforms
 
-## 🌐 المنصات المدمجة
+## المنصات المدمجة
 
 * Facebook Graph API
 
@@ -225,9 +236,9 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ---
 
-## 🛡️ Security Considerations
+## Security Considerations
 
-## 🛡️ اعتبارات أمنية
+## اعتبارات أمنية
 
 * HTTPS enforced via Traefik.
 
@@ -251,28 +262,19 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ---
 
-## 📁 File Structure
+## Project Structure
 
-## 📁 هيكل المجلدات
+## هيكل المشروع
 
-```text
-SOCMINT/
-├── backend/
-│   ├── main.py
-│   ├── routers/
-│   ├── models/
-│   └── services/
-├── frontend/
-│   ├── src/
-│   ├── components/
-│   └── views/
-├── docker-compose.yml
-├── .env.example
-└── nginx/ traefik/
-```
+The repository is structured as follows:
+يتم تنظيم المستودع على النحو التالي:
 
-```text
-SOCMINT/
+```bash
+Project/
+├── backend/             # FastAPI microservices
+├── frontend_flutter/    # Flutter frontend (Web & Mobile)
+├── Promots/             # Prompt templates
+├── ...
 ├── backend/
 │   ├── main.py
 │   ├── routers/

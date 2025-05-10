@@ -6,6 +6,7 @@ from analytics.clustering import cluster_entities
 from analytics.graph_risk_analysis import analyze_graph
 from utils.postgres_connector import PostgresConnector
 from utils.neo4j_connector import Neo4jConnector
+from utils.blockchain_connector import BlockchainConnector
 import os
 
 app = FastAPI()
@@ -23,6 +24,7 @@ class AlertResponse(BaseModel):
     score: float
     reason: str
     timestamp: str
+    blockchain_tx: str
 
 class ClusterResponse(BaseModel):
     cluster_id: int
@@ -32,13 +34,20 @@ class ClusterResponse(BaseModel):
 # Connectors
 pg = PostgresConnector()
 neo4j = Neo4jConnector()
+blockchain = BlockchainConnector()
 
 @app.post("/run-analysis")
 def run_analysis(request: RunAnalysisRequest):
     # 1. Anomaly Detection
     anomalies = detect_anomalies(request.data)
+    alerts_with_blockchain = []
     for anomaly in anomalies:
+        # Generate forensic report (here, just the alert itself)
+        forensic_hash = blockchain.hash_report(anomaly)
+        tx_hash = blockchain.send_hash_to_chain(forensic_hash)
+        anomaly['blockchain_tx'] = tx_hash
         pg.insert_alert(request.tenant_id, anomaly)
+        alerts_with_blockchain.append(anomaly)
     # 2. Clustering
     clusters = cluster_entities(request.data)
     for cluster in clusters:
@@ -46,7 +55,7 @@ def run_analysis(request: RunAnalysisRequest):
     # 3. Graph Analysis
     graph_result = analyze_graph(request.data, request.relationships)
     neo4j.push_graph(graph_result)
-    return {"alerts": anomalies, "clusters": clusters, "graph": graph_result}
+    return {"alerts": alerts_with_blockchain, "clusters": clusters, "graph": graph_result}
 
 @app.get("/alerts", response_model=List[AlertResponse])
 def get_alerts(tenant_id: Optional[str] = None):

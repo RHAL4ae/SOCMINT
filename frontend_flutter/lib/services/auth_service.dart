@@ -3,9 +3,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_service.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:logger/logger.dart';
+import 'package:web/web.dart' as web; // Use this for web redirection
 // Only import dart:html for web
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
+
 import 'jwt_utils.dart';
 
 class AuthService {
@@ -48,7 +48,7 @@ class AuthService {
       // For mobile, we would use url_launcher or in-app webview
       if (kIsWeb) {
         // Web implementation
-        html.window.location.href = uaePassLoginUrl;
+        web.window.location.href = uaePassLoginUrl;
         return true; // This won't actually return as page will redirect
       } else {
         // Mobile implementation using url_launcher

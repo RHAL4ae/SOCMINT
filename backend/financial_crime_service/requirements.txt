@@ -6,3 +6,5 @@ elasticsearch
 psycopg2-binary
 neo4j-driver
 python-dotenv
+web3
+cryptography

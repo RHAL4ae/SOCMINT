@@ -161,16 +161,19 @@ services:
       - "9050:9050"
     volumes:
       - ./tor/torrc:/etc/tor/torrc
+      - tor_data:/var/lib/tor
     networks:
       socmint_network:
         aliases:
           - tor
     restart: unless-stopped
+    user: 100:100
 
 volumes:
   esdata:
   pgdata:
   neo4jdata:
+  tor_data:
 
 networks:
   socmint_network:

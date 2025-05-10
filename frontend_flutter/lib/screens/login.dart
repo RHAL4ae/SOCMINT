@@ -63,16 +63,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(loc?.translate('login') ?? 'Login', style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(height: 24),
                   TextFormField(
-                    decoration: InputDecoration(labelText: loc?.translate('username') ?? 'Username'),
-                    onChanged: (v) => _username = v,
-                    validator: (v) => v == null || v.isEmpty ? 'Required' : null,
+                    decoration: InputDecoration(
+                      labelText: loc?.translate('username') ?? 'Username',
+                    ),
+                    onChanged: (val) => _username = val,
+                    validator: (val) => val == null || val.isEmpty ? '${loc?.translate('username') ?? 'Username'} ${loc?.translate('required') ?? 'is required'}' : null,
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
                     decoration: InputDecoration(labelText: loc?.translate('password') ?? 'Password'),
                     obscureText: true,
-                    onChanged: (v) => _password = v,
-                    validator: (v) => v == null || v.isEmpty ? 'Required' : null,
+                    onChanged: (val) => _password = val,
+                    validator: (val) => val == null || val.isEmpty ? '${loc?.translate('password') ?? 'Password'} ${loc?.translate('required') ?? 'is required'}' : null,
                   ),
                   const SizedBox(height: 24),
                   if (_error != null) ...[
