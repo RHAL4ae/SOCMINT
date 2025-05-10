@@ -55,7 +55,7 @@ class AuthService with ChangeNotifier {
       final nonce = DateTime.now().millisecondsSinceEpoch.toString();
 
       // Redirect to UAE PASS
-      final authUri = Uri.parse(authUrl).replace(
+      Uri.parse(authUrl).replace(
         queryParameters: {
           'client_id': clientId,
           'response_type': 'code',
@@ -111,7 +111,7 @@ class AuthService with ChangeNotifier {
         }
       }
     } catch (e) {
-      print('Login error: $e');
+      debugPrint('Login error: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -130,7 +130,6 @@ class AuthService with ChangeNotifier {
 
       // Validate ID token
       final idTokenClaims = JwtDecoder.decode(_idToken!);
-      final accessTokenClaims = JwtDecoder.decode(_accessToken!);
 
       // Check expiration
       if (JwtDecoder.isExpired(_idToken!) || JwtDecoder.isExpired(_accessToken!)) {
@@ -148,7 +147,7 @@ class AuthService with ChangeNotifier {
 
       return true;
     } catch (e) {
-      print('Token validation error: $e');
+      debugPrint('Token validation error: $e');
       return false;
     }
   }

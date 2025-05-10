@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart' as material;
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../assets/theme/theme_data.dart';
 import '../../assets/theme/components/dashboard_components.dart';
 import 'package:sizer/sizer.dart';
@@ -9,19 +8,11 @@ import '../../assets/theme/components/chart_components.dart';
 import '../../services/navigation_service.dart';
 import '../../services/auth_service.dart';
 import '../../services/theme_service.dart';
-import 'package:flutter/material.dart';
 import '../../services/language_service.dart';
 import '../../assets/images/logo/logo_variants.dart';
 import '../../widgets/profile/uaepass_profile_widget.dart';
 
 // Add missing components
-Widget _HomeView() => const Center(child: Text('Home View'));
-Widget _AnalyticsView() => const Center(child: Text('Analytics View'));
-Widget _ReportsView() => const Center(child: Text('Reports View'));
-Widget _SettingsView() => const Center(child: Text('Settings View'));
-
-
-
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -34,17 +25,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool _isDarkMode = false;
   final TextEditingController _searchController = TextEditingController();
 
-  static List<Widget> _widgetOptions = [
-    _HomeView(),
-    _AnalyticsView(),
-    _ReportsView(),
-    _SettingsView(),
-  ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,10 +39,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         title: Row(
           children: [
-            Logo.getPrimary(width: 32),
+            Logo.primary(width: 32),
             const SizedBox(width: 8),
             Text(
-              AppLocalizations.of(context)!.dashboardTitle,
+              'Dashboard',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -93,7 +79,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Logo.getPrimary(width: 48),
+                  Logo.primary(width: 48),
                   const SizedBox(height: 8),
                   Text(
                     'RHAL',
@@ -110,18 +96,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
             const UAEPassProfileWidget(),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.dashboard),
-              title: Text(AppLocalizations.of(context)!.dashboardTitle),
+              title: Text('Dashboard'),
               selected: _selectedIndex == 0,
               onTap: () {
                 setState(() {
@@ -132,7 +111,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.analytics),
-              title: Text(AppLocalizations.of(context)!.analyticsTitle),
+              title: Text('Analytics'),
               selected: _selectedIndex == 1,
               onTap: () {
                 setState(() {
@@ -143,7 +122,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.report),
-              title: Text(AppLocalizations.of(context)!.reportsTitle),
+              title: Text('Reports'),
               selected: _selectedIndex == 2,
               onTap: () {
                 setState(() {
@@ -154,7 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.settings),
-              title: Text(AppLocalizations.of(context)!.settingsTitle),
+              title: Text('Settings'),
               selected: _selectedIndex == 3,
               onTap: () {
                 setState(() {
@@ -175,36 +154,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: material.SearchBar(
-                      controller: TextEditingController(),
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.filter_list),
+                          onPressed: () {
+                            // Implement filter functionality
+                          },
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                       onChanged: (value) {
                         // Implement search functionality
                       },
-                      onSubmitted: (value) {
-                        // Clear search functionality
-                      },
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      // Implement filter functionality
-                    },
-                    icon: const Icon(Icons.filter_list),
-                    label: Text(AppLocalizations.of(context)!.filters),
                   ),
                 ],
               ),
               const SizedBox(height: 24),
+              Text(
+                'Dashboard',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
-                    flex: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.keyPerformanceIndicators,
+                          'Key Performance Indicators',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(height: 16),
@@ -212,7 +197,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             Expanded(
                               child: KPIWidget(
-                                title: AppLocalizations.of(context)!.totalUsers,
+                                title: 'Total Users',
                                 value: '1,234',
                                 color: AppTheme.primaryGreen,
                                 icon: Icons.group,
@@ -221,7 +206,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: KPIWidget(
-                                title: AppLocalizations.of(context)!.activeUsers,
+                                title: 'Active Users',
                                 value: '856',
                                 color: AppTheme.primaryGreen,
                                 icon: Icons.people,
@@ -234,7 +219,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             Expanded(
                               child: KPIWidget(
-                                title: AppLocalizations.of(context)!.totalPosts,
+                                title: 'Total Posts',
                                 value: '4,567',
                                 color: AppTheme.primaryGreen,
                                 icon: Icons.article,
@@ -243,7 +228,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: KPIWidget(
-                                title: AppLocalizations.of(context)!.engagementRate,
+                                title: 'Engagement Rate',
                                 value: '87%',
                                 color: AppTheme.primaryGreen,
                                 icon: Icons.trending_up,
@@ -260,7 +245,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.recentActivity,
+                          'Recent Activity',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(height: 16),
@@ -269,8 +254,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             itemCount: 5,
                             itemBuilder: (context, index) {
                               return AlertWidget(
-                                title: AppLocalizations.of(context)!.newPost,
-                                message: AppLocalizations.of(context)!.userPostedUpdate,
+                                title: 'New Post',
+                                message: 'User posted an update',
                                 color: AppTheme.primaryGreen,
                                 icon: Icons.notifications,
                                 onTap: () {
@@ -287,7 +272,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 24),
               Text(
-                AppLocalizations.of(context)!.analytics,
+                'Analytics',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 16),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../l10n/app_localizations.dart';
 
 class DashboardCard extends StatelessWidget {
   final String title;

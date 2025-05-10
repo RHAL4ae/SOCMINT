@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+import 'package:logging/logging.dart';
 
 void main() async {
   // Create logo files
@@ -47,5 +48,6 @@ Future<void> generateLogo(String fileName, Color textColor) async {
 
   final file = File('assets/images/logo/$fileName');
   await file.writeAsBytes(pngBytes);
-  print('Generated: $fileName');
+  final logger = Logger('LogoGenerator');
+    logger.info('Generated: $fileName');
 }

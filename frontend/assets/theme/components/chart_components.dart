@@ -55,7 +55,7 @@ class LineChartWidget extends StatelessWidget {
                       color: AppTheme.primaryGreen,
                       barWidth: 2,
                       dotData: FlDotData(show: true),
-                      belowBarData: BarAreaData(show: true, color: AppTheme.primaryGreen.withOpacity(0.1)),
+                      belowBarData: BarAreaData(show: true, color: AppTheme.primaryGreen.withValues(alpha: 26)),
                     ),
                   ],
                 ),
