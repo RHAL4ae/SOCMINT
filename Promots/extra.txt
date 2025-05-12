@@ -1,5 +1,7 @@
 double check if the backend is fully integrated to the main application, the default env variables are initiated and linked to the main application. 
 ===================================
+is the application is multi tenant? if so, what about postiz: it should be unique for eacch one? what about other commponents?
+===================================
 
 make sure that (git@github.com:gitroomhq/postiz-app.git) is fully integrated  in the application? and its code is fully available in the main application code where ever is required in both frontend and back end. the front end is not flutter pull the original and integrate  it to the main  application and  future notes to migrate the frontend code to fluster
 =========
