@@ -261,11 +261,108 @@ services:
       - postgres
       - kafka
 
+  # Postiz App Services
+  postiz-redis:
+    image: redis:7-alpine
+    container_name: postiz-redis-svc
+    restart: always
+    ports:
+      - "6380:6379" # Postiz Redis on port 6380
+    volumes:
+      - postiz_redis_data:/data
+    networks:
+      socmint_network:
+        aliases:
+          - postiz-redis
+
+  postiz-backend-svc:
+    build:
+      context: ./postiz_app
+      dockerfile: Dockerfile.dev
+    container_name: postiz-backend-svc
+    command: pnpm --filter postiz-backend start
+    env_file:
+      - ./postiz.env
+    ports:
+      - "8007:3000" # Postiz backend on port 8007 (internal 3000)
+    networks:
+      socmint_network:
+        aliases:
+          - postiz-backend-svc
+    depends_on:
+      - postgres # Main SOCMINT postgres
+      - postiz-redis
+    restart: unless-stopped
+    volumes:
+      - ./postiz_app:/app
+
+  postiz-frontend-svc:
+    build:
+      context: ./postiz_app
+      dockerfile: Dockerfile.dev
+    container_name: postiz-frontend-svc
+    command: pnpm --filter postiz-frontend start
+    env_file:
+      - ./postiz.env
+    ports:
+      - "8081:4200" # Postiz frontend on port 8081 (internal 4200)
+    networks:
+      socmint_network:
+        aliases:
+          - postiz-frontend-svc
+    depends_on:
+      - postiz-backend-svc
+    restart: unless-stopped
+    volumes:
+      - ./postiz_app:/app
+
+  postiz-cron-svc:
+    build:
+      context: ./postiz_app
+      dockerfile: Dockerfile.dev
+    container_name: postiz-cron-svc
+    command: pnpm --filter postiz-cron start
+    env_file:
+      - ./postiz.env
+    networks:
+      socmint_network:
+        aliases:
+          - postiz-cron-svc
+    depends_on:
+      - postgres # Main SOCMINT postgres
+      - postiz-redis
+      - postiz-backend-svc
+    restart: unless-stopped
+    volumes:
+      - ./postiz_app:/app
+
+  postiz-workers-svc:
+    build:
+      context: ./postiz_app
+      dockerfile: Dockerfile.dev
+    container_name: postiz-workers-svc
+    command: pnpm --filter postiz-workers start
+    env_file:
+      - ./postiz.env
+    networks:
+      socmint_network:
+        aliases:
+          - postiz-workers-svc
+    depends_on:
+      - postgres # Main SOCMINT postgres
+      - postiz-redis
+      - postiz-backend-svc
+    restart: unless-stopped
+    volumes:
+      - ./postiz_app:/app
+  # End of Postiz App Services
+
 volumes:
   esdata:
   pgdata:
   neo4jdata:
   tor_data:
+  postiz_redis_data:
 
 networks:
   socmint_network:

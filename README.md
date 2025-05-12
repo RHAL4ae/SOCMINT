@@ -231,8 +231,10 @@ SOCMINT is a multi-service SaaS platform composed of:
 * نقاط نهاية Reddit JSON
 
 * Dark Web (via TOR scraping)
+* **Postiz App (Social Media Management)**: Integrated for comprehensive social media scheduling, posting, and analytics. Future plans include migrating its frontend to Flutter for a unified experience. (See `postiz_app/README.md` for setup and usage)
 
-* الويب المظلم (عبر جمع البيانات عبر TOR)
+---* الويب المظلم (عبر جمع البيانات عبر TOR)
+* **تطبيق Postiz (إدارة وسائل التواصل الاجتماعي)**: مدمج لجدولة شاملة لوسائل التواصل الاجتماعي والنشر والتحليلات. تشمل الخطط المستقبلية ترحيل واجهته الأمامية إلى Flutter لتجربة موحدة. (راجع `postiz_app/README.md` للإعداد والاستخدام)
 
 ---
 

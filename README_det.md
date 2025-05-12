@@ -1232,6 +1232,39 @@ Integrate the open-source Postiz App as a multi-tenant social media management m
 
 Enable each tenant to securely manage their social media accounts (Facebook, Twitter, LinkedIn, etc.) for scheduling, publishing, and analytics — isolated per customer.
 
+### Postiz App Integration Details
+
+The Postiz app (`postiz_app`) is a powerful open-source social media management tool that has been integrated as a microservice. It provides robust features for handling multiple social media accounts, scheduling posts, and analyzing performance.
+
+**Setup and Running Postiz App:**
+
+Detailed setup and operational instructions for the Postiz app can be found in its dedicated README file: [`postiz_app/README.md`](./postiz_app/README.md).
+This guide covers:
+-   Prerequisites and dependencies.
+-   Configuration steps.
+-   Instructions on how to start and run the application.
+
+**Future Frontend Migration:**
+
+Currently, the Postiz app utilizes its own frontend. There is a future plan to migrate this frontend to Flutter. This migration aims to unify the user experience across the SOCMINT platform, providing a consistent interface and leveraging the cross-platform capabilities of Flutter. This will align the Postiz app's UI with the main `frontend_platform_all`.
+
+### تفاصيل تكامل تطبيق Postiz
+
+تطبيق Postiz (`postiz_app`) هو أداة قوية مفتوحة المصدر لإدارة وسائل التواصل الاجتماعي تم دمجها كخدمة مصغرة. يوفر ميزات قوية للتعامل مع حسابات وسائط اجتماعية متعددة وجدولة المنشورات وتحليل الأداء.
+
+**إعداد وتشغيل تطبيق Postiz:**
+
+يمكن العثور على إرشادات الإعداد والتشغيل التفصيلية لتطبيق Postiz في ملف README المخصص له: [`postiz_app/README.md`](./postiz_app/README.md).
+يغطي هذا الدليل:
+- المتطلبات الأساسية والتبعيات.
+- خطوات الإعداد.
+- إرشادات حول كيفية بدء تشغيل التطبيق.
+
+**ترحيل الواجهة الأمامية مستقبلاً:**
+
+حاليًا، يستخدم تطبيق Postiz واجهته الأمامية الخاصة. هناك خطة مستقبلية لترحيل هذه الواجهة الأمامية إلى Flutter. يهدف هذا الترحيل إلى توحيد تجربة المستخدم عبر منصة SOCMINT، وتوفير واجهة متسقة والاستفادة من قدرات Flutter عبر المنصات. سيؤدي ذلك إلى مواءمة واجهة مستخدم تطبيق Postiz مع الواجهة الرئيسية `frontend_platform_all`.
+
+
 ---
 
 ### Microservice Structure
