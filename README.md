@@ -14,8 +14,8 @@ This technical README provides a comprehensive overview of the SOCMINT platform 
 SOCMINT is a multi-service SaaS platform composed of:
 تتكون منصة SOCMINT كخدمة SaaS متعددة الخدمات من:
 
-* **Frontend**: Flutter (Dart), i18n, UAE PASS OAuth
-* **الواجهة الأمامية**: Flutter (Dart)، i18n، UAE PASS OAuth
+* **Frontend**: Vue.js, Tailwind, i18n, UAE PASS OAuth
+* **الواجهة الأمامية**: Vue.js, Tailwind, i18n, UAE PASS OAuth
 * **Backend**: FastAPI microservices
 * **الخلفية**: خدمات FastAPI المصغرة
 * **Data Layer**: PostgreSQL, Elasticsearch, Neo4j
@@ -33,7 +33,7 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 | Component      | Stack                                             |
 | -------------- | ------------------------------------------------- |
-| Frontend       | Flutter (Dart), i18n, UAE PASS OAuth              |
+| Frontend | Vue.js, Tailwind, i18n, UAE PASS OAuth |
 | Backend        | FastAPI, LangChain, Pydantic, Redis               |
 | AI Services    | HuggingFace Transformers, DeepSeek R1, Google NLP |
 | Databases      | PostgreSQL, Elasticsearch, Neo4j                  |
@@ -44,7 +44,7 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 | المكون                 | التقنية                                           |
 | ---------------------- | ------------------------------------------------- |
-| الواجهة الأمامية       | Flutter (Dart)، i18n، UAE PASS OAuth            |
+| الواجهة الأمامية | Vue.js, Tailwind, i18n, UAE PASS OAuth |
 | الخلفية                | FastAPI، LangChain، Pydantic، Redis               |
 | خدمات الذكاء الاصطناعي | HuggingFace Transformers، DeepSeek R1، Google NLP |
 | قواعد البيانات         | PostgreSQL، Elasticsearch، Neo4j                  |
@@ -113,13 +113,13 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 ### Frontend Setup (Flutter)
 
-1. `cd frontend_flutter`
+1. `cd frontend_platform_all`
 2. `cp .env.example .env` (if needed)
 3. `flutter pub get`
 4. `flutter run` (for mobile or desktop)
 5. `flutter run -d chrome` (for web development)
 6. `flutter build web` (for production web build)
-   - Output will be in `frontend_flutter/build/web`
+   - Output will be in `frontend_platform_all/build/web`
 7. Deploy the contents of `build/web` to your web server (e.g., Nginx, Netlify, Vercel, or Docker)
 
 ---
@@ -272,7 +272,7 @@ The repository is structured as follows:
 ```bash
 Project/
 ├── backend/             # FastAPI microservices
-├── frontend_flutter/    # Flutter frontend (Web & Mobile)
+├── frontend_platform_all/ # Unified Flutter frontend (Web & Mobile)
 ├── Promots/             # Prompt templates
 ├── ...
 ├── backend/
@@ -280,10 +280,10 @@ Project/
 │   ├── routers/
 │   ├── models/
 │   └── services/
-├── frontend/
-│   ├── src/
-│   ├── components/
-│   └── views/
+├── frontend_platform_all/ # Unified Flutter frontend
+│   ├── lib/               # Main application code
+│   ├── assets/            # Static assets
+│   └── web/               # Web-specific files
 ├── docker-compose.yml
 ├── .env.example
 └── nginx/ traefik/

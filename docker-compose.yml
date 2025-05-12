@@ -141,7 +141,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend_flutter
+      context: ./frontend_platform_all
       dockerfile: Dockerfile
     container_name: frontend
     ports:
@@ -168,6 +168,98 @@ services:
           - tor
     restart: unless-stopped
     user: 100:100
+
+  social_media_manager:
+    build:
+      context: ./backend/social_media_manager
+      dockerfile: Dockerfile
+    container_name: social_media_manager
+    ports:
+      - "8001:8000" # Assuming it runs on port 8000 internally, exposing on 8001
+    networks:
+      socmint_network:
+        aliases:
+          - social_media_manager
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - kafka
+
+  data_collector:
+    build:
+      context: ./backend/data_collector
+      dockerfile: Dockerfile
+    container_name: data_collector
+    ports:
+      - "8002:8000" # Assuming it runs on port 8000 internally, exposing on 8002
+    networks:
+      socmint_network:
+        aliases:
+          - data_collector
+    restart: unless-stopped
+    depends_on:
+      - kafka
+      - tor
+
+  auth_service:
+    build:
+      context: ./backend/auth_service
+      dockerfile: Dockerfile
+    container_name: auth_service
+    ports:
+      - "8003:8000" # Assuming it runs on port 8000 internally, exposing on 8003
+    networks:
+      socmint_network:
+        aliases:
+          - auth_service
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+  auth_uaepass:
+    build:
+      context: ./backend/auth_uaepass
+      dockerfile: Dockerfile
+    container_name: auth_uaepass
+    ports:
+      - "8004:8000" # Assuming it runs on port 8000 internally, exposing on 8004
+    networks:
+      socmint_network:
+        aliases:
+          - auth_uaepass
+    restart: unless-stopped
+
+  cyber_forensics_service:
+    build:
+      context: ./backend/cyber_forensics_service
+      dockerfile: Dockerfile
+    container_name: cyber_forensics_service
+    ports:
+      - "8005:8000" # Assuming it runs on port 8000 internally, exposing on 8005
+    networks:
+      socmint_network:
+        aliases:
+          - cyber_forensics_service
+    restart: unless-stopped
+    depends_on:
+      - elasticsearch
+      - neo4j
+
+  financial_crime_service:
+    build:
+      context: ./backend/financial_crime_service
+      dockerfile: Dockerfile
+    container_name: financial_crime_service
+    ports:
+      - "8006:8000" # Assuming it runs on port 8000 internally, exposing on 8006
+    networks:
+      socmint_network:
+        aliases:
+          - financial_crime_service
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - kafka
 
 volumes:
   esdata:
