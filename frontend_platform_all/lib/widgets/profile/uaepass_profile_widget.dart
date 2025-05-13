@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../localization/intl_localizations.dart';
 import '../../services/auth_service.dart';
 import '../../models/user.dart';
 
@@ -37,7 +37,7 @@ class _UAEPassProfileWidgetState extends State<UAEPassProfileWidget> { // New St
   @override
   Widget build(BuildContext context) {
     // final authService = Provider.of<AuthService>(context); // No longer needed directly for user data
-    final loc = AppLocalizations.of(context)!;
+    final loc = SocmintLocalizations.of(context);
 
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());

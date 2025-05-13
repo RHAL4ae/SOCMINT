@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Assuming this might be used later or by other components
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added missing import
 import '../../assets/theme/theme_data.dart';
 import '../../assets/theme/components/dashboard_components.dart';
-import 'package:sizer/sizer.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:sizer/sizer.dart'; // Removed unused import
+// import 'package:flutter_svg/flutter_svg.dart'; // Removed unused import, assuming Logo class handles SVGs if needed
 import '../../assets/theme/components/chart_components.dart';
-import '../../services/navigation_service.dart';
-import '../../services/auth_service.dart';
-import '../../services/theme_service.dart';
-import '../../services/language_service.dart';
+// import '../../services/navigation_service.dart'; // Removed unused import
+// import '../../services/auth_service.dart'; // Removed unused import
+// import '../../services/theme_service.dart'; // Removed unused import
+// import '../../services/language_service.dart'; // Removed unused import
 import '../../assets/images/logo/logo_variants.dart';
 import '../../widgets/profile/uaepass_profile_widget.dart';
 
-// Add missing components
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -336,52 +337,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
     );
-  }
-}
-
-enum SettingType {
-  darkMode,
-  language,
-  theme,
-}
-
-class _SettingItem extends StatelessWidget {
-  final SettingType type;
-
-  const _SettingItem({
-    required this.type,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _getTitle(context),
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String _getTitle(BuildContext context) {
-    switch (type) {
-      case SettingType.darkMode:
-        return AppLocalizations.of(context)!.darkMode;
-      case SettingType.language:
-        return AppLocalizations.of(context)!.language;
-      case SettingType.theme:
-        return AppLocalizations.of(context)!.theme;
-    }
   }
 }

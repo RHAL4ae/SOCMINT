@@ -123,8 +123,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: backend
-    environment:
-      - ENV_FILE=.env
+    env_file: .env
     ports:
       - "8000:8000"
     networks:
@@ -174,6 +173,7 @@ services:
       context: ./backend/social_media_manager
       dockerfile: Dockerfile
     container_name: social_media_manager
+    env_file: .env
     ports:
       - "8001:8000" # Assuming it runs on port 8000 internally, exposing on 8001
     networks:
@@ -190,6 +190,7 @@ services:
       context: ./backend/data_collector
       dockerfile: Dockerfile
     container_name: data_collector
+    env_file: .env
     ports:
       - "8002:8000" # Assuming it runs on port 8000 internally, exposing on 8002
     networks:

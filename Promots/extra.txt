@@ -1,24 +1,26 @@
-double check if the backend is fully integrated to the main application, the default env variables are initiated and linked to the main application. 
 ===================================
-is the application is multi tenant? if so, what about postiz: it should be unique for eacch one? what about other commponents?
+is the application is multi tenant? if so, what about postiz: it should be unique for each one? what about other components?
 ===================================
 
 make sure that (git@github.com:gitroomhq/postiz-app.git) is fully integrated  in the application? and its code is fully available in the main application code where ever is required in both frontend and back end. the front end is not flutter pull the original and integrate  it to the main  application and  future notes to migrate the frontend code to fluster
 =========
 
 the databases are integrated to the main application and does it run on localhost of the server or on docker containers; i need them to be running on application docker containers and not rely on outside installations 
-========================
-
-i need to check the whole application functions according to the main prompts /promots/01.txt:11.txt  and /promots/SOCMINT_Complete_With_Guidelines.md files and comprehensive overview and full functions and integration
 ===============================
 
+============================================== 
+review the codebase and get me list of all required env in all directories and subdirectories to enter them by the user
+
+
+
+====================
+===  DONE  =========
+====================
+double check if the backend is fully integrated to the main application, the default env variables are initiated and linked to the main application. 
+========================
+i need to check the whole application functions according to the main prompts /promots/01.txt:11.txt  and /promots/SOCMINT_Complete_With_Guidelines.md files and comprehensive overview and full functions and integration
 search the whole codebase for any problems in .MD files and fix them
 ===================================================
-
 search the whole codebase for any problems in DART and flutter files and fix them
 ==================================================
-
 search the whole codebase for any problems in docker files and docker-compose files and fix them all
-============================================== 
-
-review the codebase and get me list of all required env in all directories and subdirectories to enter them by the user

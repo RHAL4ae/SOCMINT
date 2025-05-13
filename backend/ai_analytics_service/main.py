@@ -8,6 +8,7 @@ from ai_analytics_service.models.topic_classification import classify_topic
 from ai_analytics_service.utils.kafka_consumer import KafkaTextConsumer
 from ai_analytics_service.utils.elasticsearch_client import ElasticsearchClient
 from ai_analytics_service.utils.neo4j_client import Neo4jClient
+from .config import config # Import the global config instance
 import datetime
 import asyncio
 import threading
@@ -66,15 +67,15 @@ processing_status = {
 
 # Elasticsearch and Neo4j clients
 es_client = ElasticsearchClient(
-    hosts=os.getenv("ELASTICSEARCH_HOSTS", "http://elasticsearch:9200").split(","),
-    username=os.getenv("ELASTICSEARCH_USERNAME"),
-    password=os.getenv("ELASTICSEARCH_PASSWORD")
+    hosts=config.ELASTICSEARCH_HOSTS.split(","),
+    username=config.ELASTICSEARCH_USERNAME,
+    password=config.ELASTICSEARCH_PASSWORD
 )
 
 neo4j_client = Neo4jClient(
-    uri=os.getenv("NEO4J_URI", "bolt://localhost:7687"),
-    user=os.getenv("NEO4J_USER", "neo4j"),
-    password=os.getenv("NEO4J_PASSWORD", "test")
+    uri=config.NEO4J_URI,
+    user=config.NEO4J_USER,
+    password=config.NEO4J_PASSWORD
 )
 
 # Function to process a single message
@@ -123,14 +124,14 @@ def start_kafka_consumer():
     global kafka_processor, processing_status
     
     # Kafka topics to consume from
-    topics = ["raw_social_data", "raw_scraped_data"]
+    topics = [config.KAFKA_RAW_SOCIAL_TOPIC, config.KAFKA_RAW_SCRAPED_TOPIC]
     
     try:
         # Initialize Kafka consumer
         kafka_consumer = KafkaTextConsumer(
             topics=topics,
-            bootstrap_servers=os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092"),
-            group_id="ai_analytics_group"
+            bootstrap_servers=config.KAFKA_BOOTSTRAP_SERVERS,
+            group_id=config.KAFKA_GROUP_ID
         )
         
         # Update processing status
@@ -148,7 +149,7 @@ def start_kafka_consumer():
                 
                 if processed_message:
                     # Index to Elasticsearch
-                    es_client.index_processed_data("processed_data", processed_message)
+                    es_client.index_processed_data(config.PROCESSED_DATA_INDEX, processed_message)
                     
                     # Create entity graph in Neo4j
                     if processed_message["entities"]:
@@ -182,9 +183,9 @@ def health():
 def list_models():
     """List available NLP models"""
     return {
-        "sentiment": os.getenv("SENTIMENT_MODEL", "asafaya/bert-base-arabic-sentiment"),
-        "ner": os.getenv("NER_MODEL", "aubmindlab/bert-base-arabertv02-ner"),
-        "topic_classification": os.getenv("TOPIC_MODEL", "facebook/bart-large-mnli")
+        "sentiment": config.SENTIMENT_MODEL,
+        "ner": config.NER_MODEL,
+        "topic_classification": config.TOPIC_MODEL
     }
 
 @app.post("/test", response_model=TestResponse)

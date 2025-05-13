@@ -6,17 +6,27 @@ This technical README provides a comprehensive overview of the SOCMINT platform 
 
 ## 🧱 System Architecture
 
+## 🧱 البنية المعمارية للنظام
+
 SOCMINT is a multi-service SaaS platform composed of:
+تتكون منصة SOCMINT كخدمة SaaS متعددة الخدمات من:
 
 - **Frontend**: Vue.js + Tailwind + i18n + UAE PASS OAuth
+- **الواجهة الأمامية**: Vue.js + Tailwind + i18n + UAE PASS OAuth
 - **Backend**: FastAPI microservices
+- **الخلفية**: خدمات FastAPI المصغرة
 - **Data Layer**: PostgreSQL + Elasticsearch + Neo4j
+- **طبقة البيانات**: PostgreSQL + Elasticsearch + Neo4j
 - **AI & Processing**: Kafka, Python ML services, LangChain, HuggingFace, DeepSeek
+- **الذكاء الاصطناعي والمعالجة**: Kafka، خدمات ML بلغة بايثون، LangChain، HuggingFace، DeepSeek
 - **Security & Identity**: JWT, UAE PASS OAuth2.0, Blockchain logging, TOR routing
+- **الأمن والهوية**: JWT، UAE PASS OAuth2.0، تسجيل بلوك تشين، توجيه عبر TOR
 
 ---
 
 ## 🔧 Tech Stack
+
+## 🔧 التقنيات المستخدمة
 
 | Component       | Stack                         |
 |----------------|-------------------------------|
@@ -29,11 +39,25 @@ SOCMINT is a multi-service SaaS platform composed of:
 | Scraping Layer  | Playwright, Selenium, cURL-TOR |
 | Deployment      | Docker Compose, Traefik, .env |
 
+| المكون                 | التقنية                                           |
+| ---------------------- | ------------------------------------------------- |
+| الواجهة الأمامية | Vue 3, Pinia, Vue Router, Tailwind |
+| الخلفية                | FastAPI، LangChain، Pydantic، Redis               |
+| خدمات الذكاء الاصطناعي | HuggingFace Transformers، DeepSeek R1، Google NLP |
+| قواعد البيانات         | PostgreSQL، Elasticsearch، Neo4j                  |
+| المراسلة               | Kafka (لاستخلاص وسائل التواصل والإعلام)            |
+| الهوية/المصادقة        | UAE PASS OAuth، JWT                            |
+| طبقة الاستخلاص         | Playwright، Selenium، cURL عبر TOR                |
+| النشر                  | Docker Compose، Traefik، ملفات `.env`             |
+
 ---
 
 ## 🚀 Deployment Instructions
 
+## 🚀 تعليمات النشر
+
 1. Clone the repo:
+1. استنساخ المستودع:
 
 ```bash
 git clone https://github.com/rhal4ae/SOCMINT.git
@@ -41,27 +65,36 @@ cd SOCMINT
 ```
 
 2. Create environment variables:
+2. إنشاء متغيرات البيئة:
 
 ```bash
 cp .env.example .env
 ```
 
 3. Launch with Docker Compose:
+3. تشغيل باستخدام Docker Compose:
 
 ```bash
 docker-compose up -d
 ```
 
 4. Access:
+4. الوصول إلى الخدمات:
 
 - Frontend: `http://localhost`
+- الواجهة الأمامية: `http://localhost`
 - Backend: `http://localhost:8000`
+- الخلفية: `http://localhost:8000`
 - Elasticsearch: `http://localhost:9200`
+- Elasticsearch: `http://localhost:9200`
+- Neo4j: `http://localhost:7474`
 - Neo4j: `http://localhost:7474`
 
 ---
 
 ## 📡 API Endpoints
+
+## 📡 نقاط النهاية (API)
 
 | Endpoint                   | Method | Description                        |
 |---------------------------|--------|------------------------------------|
@@ -73,14 +106,33 @@ docker-compose up -d
 | /verify/<report_id>       | GET    | Validate + audit report            |
 | /api/media/alerts         | GET    | Return sentiment alerts            |
 
+| نقطة النهاية          | الطريقة | الوصف                                 |
+| --------------------- | ------- | ------------------------------------- |
+| `/auth/uaepass/login` | GET     | إعادة التوجيه إلى تسجيل دخول UAE PASS | 
+| `/collect/twitter`    | POST    | سحب بيانات تويتر/X                   |
+| `/scrape/darkweb`     | GET     | جمع منشورات الويب المظلم              |
+| `/run-analysis`       | POST    | تشغيل نماذج NLP/ML                   |
+| `/generate-report`    | GET     | توليد تقرير استخباراتي                |
+| `/verify/<report_id>` | GET     | التحقق ومراجعة التقرير                |
+| `/api/media/alerts`   | GET     | إرجاع تنبيهات المشاعر                 |
+
 ---
 
 ## 🧪 Testing & Validation
 
+## 🧪 الاختبار والتحقق
+
 Use Postman or `curl` to test APIs.  
+استخدم Postman أو `curl` لاختبار واجهات البرمجة.
+
 Validate role-based access (Admin, Analyst, Viewer).  
+تحقق من الوصول حسب الدور (المسؤول، المحلل، المشاهد).
+
 Enable UAE PASS sandbox login for SSO test.  
+فعّل بيئة UAE PASS التجريبية لاختبار الدخول الأحادي (SSO).
+
 Use TOR for dark web scraping:
+استخدم TOR لجمع بيانات الويب المظلم:
 
 ```bash
 curl --socks5-hostname localhost:9050 http://check.torproject.org
@@ -90,147 +142,220 @@ curl --socks5-hostname localhost:9050 http://check.torproject.org
 
 ## 📊 KPIs & Analytics
 
+## 📊 مؤشرات الأداء الرئيسية والتحليلات
+
 - Integrated with GEM 2.1 indicators
+- متكامل مع مؤشرات GEM 2.1
 - Stored in Elasticsearch (index: `kpi_metrics_monthly`)
+- مُخزنة في Elasticsearch (الفهرس: `kpi_metrics_monthly`)
 - Displayed in `RahhalKPI.vue` dashboard
+- معروضة في لوحة تحكم `RahhalKPI.vue`
 
 ---
 
 ## 🌐 Integrated Platforms
 
+## 🌐 المنصات المتكاملة
+
 - Facebook Graph API
+- واجهة برمجة تطبيقات Facebook Graph
 - Twitter/X API v2
+- واجهة برمجة تطبيقات Twitter/X v2
 - Telegram Bot API
+- واجهة برمجة تطبيقات Telegram Bot
 - WhatsApp Business Cloud API
+- واجهة برمجة تطبيقات WhatsApp Business Cloud
 - TikTok + Snap Map via Web Scraping
+- TikTok + Snap Map عبر استخلاص الويب
 - Google Business Profile API
+- واجهة برمجة تطبيقات Google Business Profile
 - Reddit JSON endpoints
+- نقاط نهاية Reddit JSON
 - Dark Web (via TOR scraping)
+- الويب المظلم (عبر استخلاص TOR)
 
 ---
 
 ## 🛡️ Security Considerations
 
+## 🛡️ اعتبارات الأمان
+
 - HTTPS via Traefik
+- HTTPS عبر Traefik
 - Blockchain logging of report trails
+- تسجيل مسارات التقارير عبر البلوكتشين
 - Verifiable credentials via DID
+- بيانات اعتماد يمكن التحقق منها عبر DID (المعرفات اللامركزية)
 - TOR routing via dockerized SOCKS5
+- توجيه TOR عبر SOCKS5 المضمن في Docker
 - JWT session enforcement
+- فرض جلسات JWT (JSON Web Tokens)
 
 ---
 
 ## 📁 File Structure (Simplified)
 
+## 📁 هيكل الملفات (مبسط)
+
 ```
 SOCMINT/
 │
-├── backend/
-│   ├── main.py
-│   ├── routers/
-│   ├── models/
-│   ├── services/
+├── backend/ (الخلفية)
+│   ├── main.py (الملف الرئيسي)
+│   ├── routers/ (الموجهات)
+│   ├── models/ (النماذج)
+│   ├── services/ (الخدمات)
 │
-├── frontend/
-│   ├── src/
-│   ├── components/
-│   ├── views/
+├── frontend/ (الواجهة الأمامية)
+│   ├── src/ (المصدر)
+│   ├── components/ (المكونات)
+│   ├── views/ (العروض)
 │
-├── docker-compose.yml
-├── .env.example
-├── nginx/ + traefik/
+├── docker-compose.yml (ملف Docker Compose)
+├── .env.example (ملف بيئة نموذجي)
+├── nginx/ + traefik/ (ملفات Nginx و Traefik)
 ```
 
 ---
 
 ## 🧠 AI Agents
 
+## 🧠 وكلاء الذكاء الاصطناعي
+
 Supports modular LLM agents for:
+يدعم وكلاء نماذج لغوية كبيرة (LLM) معيارية من أجل:
 
 - Entity classification
+- تصنيف الكيانات
 - Financial anomaly detection
+- كشف الحالات الشاذة المالية
 - Risk scoring via DeepSeek R1
+- تسجيل المخاطر عبر DeepSeek R1
 - NLP-based media profiling
+- التنميط الإعلامي القائم على معالجة اللغات الطبيعية (NLP)
 
 ---
 
 ## 🤝 Contribution Guidelines
 
+## 🤝 إرشادات المساهمة
+
 - Use clear commit messages
+- استخدم رسائل commit واضحة
 - Document API changes
+- وثّق تغييرات واجهة برمجة التطبيقات (API)
 - Follow PEP8 / ESLint standards
+- اتبع معايير PEP8 / ESLint
 - Add prompt-based AI test coverage
+- أضف تغطية اختبارية للذكاء الاصطناعي قائمة على المطالبات (Prompts)
 - Maintain `.env.example` always
+- حافظ على تحديث ملف `.env.example` دائمًا
 
 ---
 
 ## Maintained by
 
-Rami Kamel | SOCMINT Architect  
-Ajman, UAE 🇦🇪 | AI + Cybersecurity Fellow  
+## صيانة بواسطة
 
+Rami Kamel | SOCMINT Architect  
+رامي كامل | مهندس SOCMINT  
+Ajman, UAE 🇦🇪 | AI + Cybersecurity Fellow  
+عجمان، الإمارات العربية المتحدة 🇦🇪 | زميل في الذكاء الاصطناعي والأمن السيبراني  
+
+# SOCMINT – Sovereign Multi-Channel Intelligence Platform
 # SOCMINT – منصة الاستخبارات السيادية متعددة القنوات
 
+## Introduction
 ## المقدمة  
+
+SOCMINT is an integrated SaaS platform for open-source intelligence (OSINT) collection and analysis, social media monitoring, financial crime detection, and digital forensic investigation, powered by the latest AI models and rapid deployment capabilities via containers. The platform aims to assist investigators and security specialists in obtaining immediate insights from diverse and distributed data through a unified and secure interface.
 
 SOCMINT هي منصة SaaS متكاملة لجمع وتحليل المعلومات المفتوحة (OSINT)، ومراقبة وسائل التواصل الاجتماعي، واكتشاف الجرائم المالية، والتحقيق الجنائي الرقمي، مدعومة بأحدث نماذج الذكاء الاصطناعي وقابلية النشر السريعة عبر الحاويات. تهدف المنصة إلى مساعدة المحققين وأخصائيي الأمن في الحصول على رؤى فورية من بيانات متنوعة وموزعة عبر واجهة موحدة ومؤمَّنة.
 
 ---
 
+## Environmental Requirements
 ## المتطلبات البيئية  
 
+- **Operating System**: Ubuntu Server 20.04+ or equivalent  
 - **نظام التشغيل**: Ubuntu Server 20.04+ أو ما يعادله  
+- **Containers**: Docker ≥20.10, Docker Compose ≥1.29  
 - **حاويات**: Docker ≥20.10, Docker Compose ≥1.29  
+- **System Resources**: CPU 16-core, RAM 32 GB, SSD 512 GB  
 - **موارد النظام**: CPU 16-core, RAM 32 GB, SSD 512 GB  
+- **Network**: Secure internal connection for Kafka, Elasticsearch, Neo4j, PostgreSQL  
 - **شبكة**: اتصال داخلي آمن لـ Kafka, Elasticsearch, Neo4j, PostgreSQL  
+- **Development Tools**: Python 3.10+, Flutter SDK (for frontend), Node.js (if needed)
 - **أدوات تطوير**: Python 3.10+, Flutter SDK (للواجهة), Node.js (إذا لزم)
 
 ---
 
+## General Project Structure
 ## الهيكلية العامة للمشروع  
 
 ```
 socmint-platform/
 ├── backend/
-│   ├── data_collector/            # جمع البيانات (OSINT + Web Scraping)
-│   ├── ai_analytics_service/      # معالجة النصوص (NLP + تصنيف)
-│   ├── financial_crime_service/   # اكتشاف الجرائم المالية (Anomaly & Clustering)
-│   ├── cyber_forensics_service/   # التحقيق الجنائي وتوثيق البلوكتشين
-│   ├── social_media_manager/      # إدارة ونشر المحتوى عبر Postiz
-│   └── auth_uaepass/              # تكامل UAE PASS (OIDC)
-├── frontend_flutter/              # لوحة التحكم (Flutter Web)
-├── tor/                           # إعداد TOR Proxy  
+│   ├── data_collector/            # Data Collection (OSINT + Web Scraping)
+│   │                                # جمع البيانات (OSINT + Web Scraping)
+│   ├── ai_analytics_service/      # Text Processing (NLP + Classification)
+│   │                                # معالجة النصوص (NLP + تصنيف)
+│   ├── financial_crime_service/   # Financial Crime Detection (Anomaly & Clustering)
+│   │                                # اكتشاف الجرائم المالية (Anomaly & Clustering)
+│   ├── cyber_forensics_service/   # Forensic Investigation & Blockchain Logging
+│   │                                # التحقيق الجنائي وتوثيق البلوكتشين
+│   ├── social_media_manager/      # Content Management & Publishing via Postiz
+│   │                                # إدارة ونشر المحتوى عبر Postiz
+│   └── auth_uaepass/              # UAE PASS Integration (OIDC)
+│                                    # تكامل UAE PASS (OIDC)
+├── frontend_flutter/              # Control Panel (Flutter Web)
+│                                    # لوحة التحكم (Flutter Web)
+├── tor/                           # TOR Proxy Setup
+│   │                                # إعداد TOR Proxy  
 │   └── Dockerfile  
-├── docker-compose.yml             # تنسيق تشغيل جميع الخدمات  
-├── .env                           # متغيرات البيئة المشتركة  
-└── README.md                      # هذا الملف  
+├── docker-compose.yml             # Service Orchestration
+│                                    # تنسيق تشغيل جميع الخدمات  
+├── .env                           # Shared Environment Variables
+│                                    # متغيرات البيئة المشتركة  
+└── README.md                      # This File
+                                   # هذا الملف  
 ```
 
 ---
 
+## Microservices Details
 ## تفاصيل الخدمات المصغرة (Microservices)
 
 ### 1. data_collector  
 
+- **Description**: Collects data from social media APIs (Facebook, Twitter, Reddit, Instagram, WhatsApp) and performs Web Scraping, including dark web via TOR.
 - **وصف**: يجمع البيانات من APIs لوسائل التواصل (Facebook, Twitter, Reddit, Instagram, WhatsApp) ويجري Web Scraping، بما في ذلك ويب الظلام عبر TOR  
+- **Endpoints**:
 - **نقاط النهاية**:  
   - `POST /collect/<platform>`  
   - `POST /scrape`  
   - `POST /scrape/darkweb`  
   - `GET /status`  
+- **Outputs**: Pushes messages to Kafka Topics: `raw_social_data` and `raw_scraped_data`.
 - **المخرجات**: تُدفع الرسائل إلى Kafka Topics: `raw_social_data` و `raw_scraped_data`  
 
 ### 2. ai_analytics_service  
 
+- **Description**: Consumes Kafka data and applies AraBERT/mBERT models for sentiment analysis, entity extraction, and topic classification, then writes results to Elasticsearch and Neo4j.
 - **وصف**: يستهلك بيانات Kafka ويطبّق نماذج AraBERT/mBERT لتحليل المشاعر، واستخراج الكيانات، وتصنيف المواضيع، ثم يكتب النتائج إلى Elasticsearch و Neo4j  
+- **Endpoints**:
 - **نقاط النهاية**:  
   - `GET /health`  
   - `POST /test`  
   - `GET /models`  
+- **Outputs**: Elasticsearch index `processed_data`, and entity graphs in Neo4j.
 - **مخرجات**: Elasticsearch index `processed_data`، ورسومات الكيانات في Neo4j  
 
 ### 3. financial_crime_service  
 
+- **Description**: Uses Isolation Forest and KMeans to detect unusual patterns and form clusters of suspicious entities, pushing results to PostgreSQL and Neo4j.
 - **وصف**: يستخدم Isolation Forest و KMeans لاكتشاف الأنماط غير المعتادة وتكوين مجموعات الكيانات المشبوهة، مع دفع النتائج إلى PostgreSQL و Neo4j  
+- **Endpoints**:
 - **نقاط النهاية**:  
   - `POST /run-analysis`  
   - `GET /alerts`  
@@ -238,7 +363,9 @@ socmint-platform/
 
 ### 4. cyber_forensics_service  
 
+- **Description**: Reconstructs incident timelines from Elasticsearch, links digital evidence with financial data, and documents report integrity via blockchain (Ethereum/Hyperledger).
 - **وصف**: يعيد بناء جداول زمنية للحوادث من Elasticsearch، يربط الأدلة الرقمية مع البيانات المالية، ويوثق سلامة التقارير عبر البلوكتشين (Ethereum/Hyperledger)  
+- **Endpoints**:
 - **نقاط النهاية**:  
   - `POST /generate-report`  
   - `GET /report/{id}`  
@@ -247,7 +374,9 @@ socmint-platform/
 
 ### 5. social_media_manager  
 
+- **Description**: Integrates Postiz App to enable each tenant to schedule and publish content and measure engagement in isolation.
 - **وصف**: يدمج Postiz App لتمكين كل مستأجر من جدولة ونشر المحتوى وقياس التفاعل بشكل معزول  
+- **Endpoints**:
 - **نقاط النهاية**:  
   - `POST /connect/account`  
   - `POST /schedule`  
@@ -256,7 +385,9 @@ socmint-platform/
 
 ### 6. auth_uaepass  
 
+- **Description**: Implements OAuth2 Authorization Code flow with PKCE via UAE PASS Sandbox to authenticate users with national trust level.
 - **وصف**: يحقن تدفق OAuth2 Authorization Code مع PKCE عبر UAE PASS Sandbox لتوثيق المستخدمين بمستوى الثقة الوطني  
+- **Endpoints**:
 - **نقاط النهاية**:  
   - `GET /auth/uaepass/login`  
   - `GET /auth/uaepass/callback`  
@@ -265,12 +396,18 @@ socmint-platform/
 
 ---
 
+## User Interface – socmint_dashboard (Flutter)
 ## واجهة المستخدم – socmint_dashboard (Flutter)  
 
+- **Features**:
 - **الميزات**:  
+  - RTL/LTR support for four languages (Arabic, English, Farsi, Russian)  
   - دعم RTL/LTR لأربع لغات (عربي، إنجليزي، فارسي، روسي)  
+  - Standard and partial login via UAE PASS  
   - تسجيل دخول قياسي وجزئي عبر UAE PASS  
+  - Role-based dashboards (Admin, Analyst, Viewer)  
   - لوحات دورية (Admin, Analyst, Viewer)  
+- **Structure**:
 - **البنية**:  
   - `lib/screens/`  
   - `lib/services/`  
@@ -338,6 +475,7 @@ networks:
 
 ---
 
+## Environment Variables File (.env)
 ## ملف المتغيرات البيئة (.env)  
 
 ```
@@ -370,8 +508,10 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 
 ---
 
+## Operating Steps
 ## خطوات التشغيل  
 
+1. **Clone**
 1. **الاستنساخ**  
 
    ```bash
@@ -379,13 +519,16 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
    cd SOCMINT
    ```  
 
+2. **Configure .env** as shown above.
 2. **تكوين .env** كما هو موضح أعلاه.  
+3. **Build and run containers**
 3. **بناء الحاويات وتشغيلها**  
 
    ```bash
    docker-compose up --build -d
    ```  
 
+4. **Verify**
 4. **التحقق**  
    - `curl http://localhost:8000/health`  
    - `curl http://localhost`  
@@ -393,17 +536,23 @@ REDIRECT_URI=https://your-domain.com/auth/uaepass/callback
 
 ---
 
+## Testing Strategy
 ## استراتيجية الاختبار  
 
+- **Kafka & Databases**: Verify the existence of Topics and Tables.
 - **Kafka & قواعد البيانات**: تحقق من وجود Topics والجداول  
+- **Backend APIs**: Use Postman or curl to test all endpoints.
 - **Backend APIs**: استخدم Postman أو curl لاختبار جميع نقاط النهاية  
+- **Flutter Interface**: Login, language switching, user roles.
 - **واجهة Flutter**: تسجيل الدخول، تبديل اللغات، أدوار المستخدم  
+- **TOR**:
 - **TOR**:  
 
   ```bash
   curl --socks5-hostname localhost:9050 http://check.torproject.org
   ```  
 
+- **Final Integration**:
 - **التكامل النهائي**:  
   - توليد تقرير جنائي  
   - تحليل نصي  

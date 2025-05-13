@@ -106,23 +106,60 @@ SOCMINT is a multi-service SaaS platform composed of:
 
 8. **الوصول إلى الخدمات**
 
+---
+
+## Configuration Management
+
+## إدارة التكوين
+
+To enhance robustness and maintainability, the SOCMINT platform employs standardized configuration practices:
+لتعزيز المتانة وقابلية الصيانة، تستخدم منصة SOCMINT ممارسات تكوين موحدة:
+
+*   **Centralized Environment Variables**: The main `.env` file at the project root is the primary source for environment variables. Each backend microservice (`ai_analytics_service`, `social_media_manager`, `data_collector`) now consistently uses the `env_file: .env` directive in the `docker-compose.yml`. This ensures all services draw their configurations from this single, authoritative source when managed by Docker Compose.
+*   **متغيرات البيئة المركزية**: ملف `.env` الرئيسي في جذر المشروع هو المصدر الأساسي لمتغيرات البيئة. تستخدم كل خدمة مصغرة في الخلفية (`ai_analytics_service`، `social_media_manager`، `data_collector`) الآن بشكل متسق التوجيه `env_file: .env` في ملف `docker-compose.yml`. هذا يضمن أن جميع الخدمات تستمد تكويناتها من هذا المصدر الموحد والموثوق عند إدارتها بواسطة Docker Compose.
+
+*   **Service-Specific Configuration Validation**: Each backend microservice includes a `config.py` module responsible for:
+    *   Loading its required environment variables.
+    *   Validating critical configurations at startup.
+    *   If critical configurations are missing or invalid, the service will log a detailed error message specifying the missing variables and will **fail to start**. This prevents services from running in an improperly configured state.
+*   **التحقق من صحة التكوين الخاص بالخدمة**: تتضمن كل خدمة مصغرة في الخلفية وحدة `config.py` مسؤولة عن:
+    *   تحميل متغيرات البيئة المطلوبة.
+    *   التحقق من صحة التكوينات الحرجة عند بدء التشغيل.
+    *   إذا كانت التكوينات الحرجة مفقودة أو غير صالحة، ستقوم الخدمة بتسجيل رسالة خطأ مفصلة تحدد المتغيرات المفقودة و **لن تبدأ التشغيل**. هذا يمنع الخدمات من العمل في حالة تكوين غير سليمة.
+
+This approach ensures that services are always launched with the necessary configurations, improving overall system stability and making troubleshooting easier.
+يضمن هذا النهج تشغيل الخدمات دائمًا بالتكوينات اللازمة، مما يحسن استقرار النظام بشكل عام ويسهل استكشاف الأخطاء وإصلاحها.
+
    * الواجهة الأمامية: `http://localhost`
    * الخلفية: `http://localhost:8000`
    * Elasticsearch: `http://localhost:9200`
    * Neo4j: `http://localhost:7474`
 
+---
+
 ### Frontend Setup (Flutter)
 
+### إعداد الواجهة الأمامية (Flutter)
+
 1. `cd frontend_platform_all`
+   - `cd frontend_platform_all` (الانتقال إلى مجلد الواجهة الأمامية)
 2. `cp .env.example .env` (if needed)
+   - `cp .env.example .env` (إذا لزم الأمر، انسخ ملف البيئة النموذجي)
 3. `flutter pub get`
+   - `flutter pub get` (للحصول على جميع الاعتماديات الخاصة بالمشروع)
 4. `flutter run` (for mobile or desktop)
+   - `flutter run` (لتشغيل التطبيق على الهاتف المحمول أو سطح المكتب)
 5. `flutter run -d chrome` (for web development)
+   - `flutter run -d chrome` (لتشغيل التطبيق كإصدار ويب في متصفح كروم)
 6. `flutter build web` (for production web build)
+   - `flutter build web` (لبناء إصدار الإنتاج من تطبيق الويب)
    - Output will be in `frontend_platform_all/build/web`
+   - سيكون الناتج في المجلد `frontend_platform_all/build/web`
 7. Deploy the contents of `build/web` to your web server (e.g., Nginx, Netlify, Vercel, or Docker)
+   - انشر محتويات المجلد `build/web` على خادم الويب الخاص بك (مثل Nginx، Netlify، Vercel، أو Docker)
 
 ---
+
 
 ## API Endpoints
 
